@@ -19,7 +19,6 @@ export default function Home() {
 
   return (
     <div className="wrapper p-4 ">
-      <h1 className="text-5xl text-center my-6">Marvel Zombies</h1>
       <div className="sections grid gap-8">
         {data &&
           data.map((section) => (

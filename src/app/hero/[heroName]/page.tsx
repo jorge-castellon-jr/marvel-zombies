@@ -31,15 +31,15 @@ export default function Hero({ params }: { params: { heroName: string } }) {
     "bg-orange-700",
     "bg-red-700",
   ];
+  const heroName = params.heroName.replace(/_/g, " ");
 
   return (
     <div className="wrapper p-4 ">
-      <h1 className="text-5xl grid place-items-center my-6">
-        {params.heroName.replace("_", " ")}
-      </h1>
       <div className="sections grid gap-8">
         {data.length > 0 ? (
-          <div className={`grid grid-flow-col grid-cols-${data.length} gap-4`}>
+          <div
+            className={`hero-tabs order-last md:order-first md:relative grid grid-flow-col grid-cols-${data.length} gap-4`}
+          >
             {data.map((skill, index) => (
               <div
                 key={index}
@@ -59,26 +59,26 @@ export default function Hero({ params }: { params: { heroName: string } }) {
         )}
 
         {data.length > 0 && (
-          <div className="bg-gray-800 rounded-lg p-4 grid md:grid-cols-2 gap-4">
+          <div className="bg-cyan-200 bg-opacity-50 rounded-lg grid md:grid-cols-2 gap-4">
             <div className="flex flex-col gap-4">
-              <div className="p-4 bg-red-800 border border-white">
-                {data[activeTab].name}
+              <div className="p-4 -mx-4 bg-red-800 border border-white">
+                {data[activeTab].name} {heroName}
               </div>
-              <div>
-                <div className="px-4 py-2 bg-blue-900 border border-white">
+              <div className="skill">
+                <div className="skill__title bg-blue-900">
                   {data[activeTab].attack.name}
                 </div>
-                <div className="relative grid grid-cols-4 gap-1 mx-2">
-                  <div className="grid place-items-center  bg-amber-50 text-gray-800 py-4">
+                <div className="skill__attack">
+                  <div className="skill__attack__slot">
                     {data[activeTab].attack.type}
                   </div>
-                  <div className="grid place-items-center  bg-amber-50 text-gray-800 p-4">
+                  <div className="skill__attack__slot">
                     {data[activeTab].attack.range}
                   </div>
-                  <div className="grid place-items-center  bg-amber-50 text-gray-800 p-4">
+                  <div className="skill__attack__slot">
                     {data[activeTab].attack.dice}
                   </div>
-                  <div className="grid place-items-center  bg-amber-50 text-gray-800 p-4">
+                  <div className="skill__attack__slot">
                     {data[activeTab].attack.accuracy}
                   </div>
                 </div>
@@ -88,22 +88,14 @@ export default function Hero({ params }: { params: { heroName: string } }) {
                   <div className="px-4 py-2 bg-green-800 border border-white">
                     Devour
                   </div>
-                  <div className="grid grid-cols-4 gap-1 mx-2">
-                    <div className="grid place-items-center bg-amber-50 text-gray-800 p-4">
-                      Melee
-                    </div>
-                    <div className="grid place-items-center bg-amber-50 text-gray-800 p-4">
-                      0
-                    </div>
-                    <div className="grid place-items-center bg-amber-50 text-gray-800 p-4">
-                      1
-                    </div>
-                    <div className="grid place-items-center bg-amber-50 text-gray-800 p-4">
-                      4+
-                    </div>
+                  <div className="skill__attack">
+                    <div className="skill__attack__slot">Melee</div>
+                    <div className="skill__attack__slot">0</div>
+                    <div className="skill__attack__slot">1</div>
+                    <div className="skill__attack__slot">4+</div>
                   </div>
                   {!!data[activeTab].devour?.effect && (
-                    <div className="mx-2 my-1 p-4 bg-amber-50 text-gray-800">
+                    <div className="skill__attack__desc mx-2 my-1">
                       {data[activeTab].devour?.effect}
                     </div>
                   )}
@@ -114,22 +106,20 @@ export default function Hero({ params }: { params: { heroName: string } }) {
               {data[activeTab].levels.map((level, index) => {
                 if (level.name === "")
                   return (
-                    <div key={index}>
-                      <div
-                        className={`px-4 py-2 ${colors[index]} border border-white`}
-                      >
+                    <div key={index} className="skill">
+                      <div className={`skill__title ${colors[index]}`}>
                         + {level.info}
                       </div>
                     </div>
                   );
                 return (
-                  <div key={index}>
-                    <div
-                      className={`px-4 py-2 ${colors[index]} border border-white`}
-                    >
+                  <div key={index} className="skill">
+                    <div className={`skill__title ${colors[index]}`}>
                       {level.name}
                     </div>
-                    <div>{level.info}</div>
+                    <div className="skill__ability">
+                      <div className="skill__ability__slot">{level.info}</div>
+                    </div>
                   </div>
                 );
               })}

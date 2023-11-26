@@ -25,3 +25,29 @@ body {
     )
     rgb(var(--background-start-rgb));
 }
+
+.hero-tabs {
+  @apply sticky bottom-0 bg-black py-4;
+}
+
+.skill {
+  &__title {
+    @apply px-4 py-2 border border-white;
+  }
+  &__attack,
+  &__ability {
+    @apply grid gap-1 mx-2;
+    &__slot {
+      @apply bg-amber-50 text-gray-800 p-2;
+    }
+    &__desc {
+      @apply bg-amber-50 text-gray-800 p-2;
+    }
+  }
+  &__attack {
+    @apply grid-cols-4;
+    &__slot {
+      @apply py-4 text-center;
+    }
+  }
+}
