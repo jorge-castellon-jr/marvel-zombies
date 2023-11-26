@@ -43,7 +43,7 @@ export default function Hero({ params }: { params: { heroName: string } }) {
             {data.map((skill, index) => (
               <div
                 key={index}
-                className={`tab  p-4 rounded-lg transition-all duration-300 ${
+                className={`tab  p-4 rounded-lg transition-all duration-300 text-center ${
                   activeTab === index ? "bg-green-700" : "bg-green-900"
                 }`}
                 onClick={() => setActiveTab(index)}
