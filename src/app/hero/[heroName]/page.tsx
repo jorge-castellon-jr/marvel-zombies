@@ -34,7 +34,7 @@ export default function Hero({ params }: { params: { heroName: string } }) {
 
   return (
     <div className="wrapper p-4 ">
-      <h1 className="text-5xl text-center my-6">
+      <h1 className="text-5xl grid place-items-center my-6">
         {params.heroName.replace("_", " ")}
       </h1>
       <div className="sections grid gap-8">
@@ -53,11 +53,13 @@ export default function Hero({ params }: { params: { heroName: string } }) {
             ))}
           </div>
         ) : (
-          <p className="text-center">No skills available for this hero</p>
+          <p className="grid place-items-center">
+            No skills available for this hero
+          </p>
         )}
 
         {data.length > 0 && (
-          <div className="bg-gray-900 rounded-lg p-4 grid md:grid-cols-2 gap-4">
+          <div className="bg-gray-800 rounded-lg p-4 grid md:grid-cols-2 gap-4">
             <div className="flex flex-col gap-4">
               <div className="p-4 bg-red-800 border border-white">
                 {data[activeTab].name}
@@ -67,16 +69,16 @@ export default function Hero({ params }: { params: { heroName: string } }) {
                   {data[activeTab].attack.name}
                 </div>
                 <div className="relative grid grid-cols-4 gap-1 mx-2">
-                  <div className="text-center  bg-amber-50 text-gray-800 p-4">
+                  <div className="grid place-items-center  bg-amber-50 text-gray-800 py-4">
                     {data[activeTab].attack.type}
                   </div>
-                  <div className="text-center  bg-amber-50 text-gray-800 p-4">
+                  <div className="grid place-items-center  bg-amber-50 text-gray-800 p-4">
                     {data[activeTab].attack.range}
                   </div>
-                  <div className="text-center  bg-amber-50 text-gray-800 p-4">
+                  <div className="grid place-items-center  bg-amber-50 text-gray-800 p-4">
                     {data[activeTab].attack.dice}
                   </div>
-                  <div className="text-center  bg-amber-50 text-gray-800 p-4">
+                  <div className="grid place-items-center  bg-amber-50 text-gray-800 p-4">
                     {data[activeTab].attack.accuracy}
                   </div>
                 </div>
@@ -87,16 +89,16 @@ export default function Hero({ params }: { params: { heroName: string } }) {
                     Devour
                   </div>
                   <div className="grid grid-cols-4 gap-1 mx-2">
-                    <div className="text-center bg-amber-50 text-gray-800 p-4">
+                    <div className="grid place-items-center bg-amber-50 text-gray-800 p-4">
                       Melee
                     </div>
-                    <div className="text-center bg-amber-50 text-gray-800 p-4">
+                    <div className="grid place-items-center bg-amber-50 text-gray-800 p-4">
                       0
                     </div>
-                    <div className="text-center bg-amber-50 text-gray-800 p-4">
+                    <div className="grid place-items-center bg-amber-50 text-gray-800 p-4">
                       1
                     </div>
-                    <div className="text-center bg-amber-50 text-gray-800 p-4">
+                    <div className="grid place-items-center bg-amber-50 text-gray-800 p-4">
                       4+
                     </div>
                   </div>
