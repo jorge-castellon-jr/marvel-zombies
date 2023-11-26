@@ -102,9 +102,11 @@ export default function Hero({ params }: { params: { heroName: string } }) {
                       4+
                     </div>
                   </div>
-                  <div className="mx-2 my-1 p-4 bg-amber-50 text-gray-800">
-                    {data[activeTab].devour?.effect}
-                  </div>
+                  {!!data[activeTab].devour?.effect && (
+                    <div className="mx-2 my-1 p-4 bg-amber-50 text-gray-800">
+                      {data[activeTab].devour?.effect}
+                    </div>
+                  )}
                 </div>
               )}
             </div>
