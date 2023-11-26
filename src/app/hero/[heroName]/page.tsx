@@ -62,31 +62,48 @@ export default function Hero({ params }: { params: { heroName: string } }) {
               <div className="p-4 bg-red-800 border border-white">
                 {data[activeTab].name}
               </div>
-              <div className="px-4 py-2 bg-blue-900 border border-white">
-                {data[activeTab].attack.name}
-              </div>
-              <div className="relative grid grid-cols-4">
-                <div className="text-center">{data[activeTab].attack.type}</div>
-                <div className="text-center">
-                  {data[activeTab].attack.range}
+              <div>
+                <div className="px-4 py-2 bg-blue-900 border border-white">
+                  {data[activeTab].attack.name}
                 </div>
-                <div className="text-center">{data[activeTab].attack.dice}</div>
-                <div className="text-center">
-                  {data[activeTab].attack.accuracy}
+                <div className="relative grid grid-cols-4 gap-1 mx-2">
+                  <div className="text-center  bg-amber-50 text-gray-800 p-4">
+                    {data[activeTab].attack.type}
+                  </div>
+                  <div className="text-center  bg-amber-50 text-gray-800 p-4">
+                    {data[activeTab].attack.range}
+                  </div>
+                  <div className="text-center  bg-amber-50 text-gray-800 p-4">
+                    {data[activeTab].attack.dice}
+                  </div>
+                  <div className="text-center  bg-amber-50 text-gray-800 p-4">
+                    {data[activeTab].attack.accuracy}
+                  </div>
                 </div>
               </div>
               {data[activeTab].name.includes("Zombie") && (
-                <>
+                <div>
                   <div className="px-4 py-2 bg-green-800 border border-white">
                     Devour
                   </div>
-                  <div className="relative grid grid-cols-4">
-                    <div className="text-center">Melee</div>
-                    <div className="text-center">0</div>
-                    <div className="text-center">1</div>
-                    <div className="text-center">4+</div>
+                  <div className="grid grid-cols-4 gap-1 mx-2">
+                    <div className="text-center bg-amber-50 text-gray-800 p-4">
+                      Melee
+                    </div>
+                    <div className="text-center bg-amber-50 text-gray-800 p-4">
+                      0
+                    </div>
+                    <div className="text-center bg-amber-50 text-gray-800 p-4">
+                      1
+                    </div>
+                    <div className="text-center bg-amber-50 text-gray-800 p-4">
+                      4+
+                    </div>
                   </div>
-                </>
+                  <div className="mx-2 my-1 p-4 bg-amber-50 text-gray-800">
+                    {data[activeTab].devour?.effect}
+                  </div>
+                </div>
               )}
             </div>
             <div className="grid gap-4">
