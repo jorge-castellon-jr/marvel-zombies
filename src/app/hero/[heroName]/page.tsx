@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { HeroSection } from "@/app/api/hero/route";
-import HeroTracker from "@/components/HeroTracker";
+import HeroTracker from "@/components/HeroCards/HeroTracker";
 
 export default function Hero({ params }: { params: { heroName: string } }) {
   // get the data from the api from api scraper route
@@ -44,7 +44,7 @@ export default function Hero({ params }: { params: { heroName: string } }) {
             } gap-4`}
           >
             <div
-              className=" tab hidden sm:block bg-green-900 rounded-lg"
+              className=" md:hidden grid place-items-center bg-green-900 rounded-lg p-4 text-center"
               onClick={() => (location.href = "/")}
             >
               {"<"}

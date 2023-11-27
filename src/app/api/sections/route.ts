@@ -10,6 +10,12 @@ interface Hero {
   name: string;
   image: string;
   link: string;
+  type: HeroType;
+}
+
+export enum HeroType {
+  Hero = "Hero",
+  Zombie = "Zombie",
 }
 
 const getSections = async (): Promise<Section[]> => {
@@ -23,7 +29,7 @@ const getSections = async (): Promise<Section[]> => {
   ).toArray();
 
   // Extract necessary data from sections
-  const extractedData = sections.map((section) => {
+  const extractedData = sections.map((section): Section => {
     // Example extraction, modify as per your data structure
     return {
       // have box name add spaces between words and numbers
@@ -42,15 +48,19 @@ const getSections = async (): Promise<Section[]> => {
         .find(".survivor-table")
         .toArray()
         .map((survivor) => {
+          const survivorImage = $(survivor).find("img");
           return {
             name: $(survivor).find("a").attr("title") as string,
             image:
-              ($(survivor).find("img").attr("data-src") as string) ||
-              ($(survivor).find("img").attr("src") as string),
+              (survivorImage.attr("data-src") as string) ||
+              (survivorImage.attr("src") as string),
             link: $(survivor)
               .find("a")
               .attr("href")
               ?.replace("/wiki", "/hero") as string,
+            type: survivorImage.attr("data-image-name")?.includes("zombie")
+              ? HeroType.Zombie
+              : HeroType.Hero,
           };
         }),
     };
