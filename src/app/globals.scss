@@ -28,6 +28,9 @@ body {
 
 .hero-tabs {
   @apply sticky bottom-0 bg-black py-4;
+  .tab {
+    @apply grid place-items-center;
+  }
 }
 
 .skill {

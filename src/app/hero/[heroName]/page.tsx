@@ -38,8 +38,16 @@ export default function Hero({ params }: { params: { heroName: string } }) {
       <div className="sections grid gap-8">
         {data.length > 0 ? (
           <div
-            className={`hero-tabs order-last md:order-first md:relative grid grid-flow-col grid-cols-${data.length} gap-4`}
+            className={`hero-tabs order-last md:order-first md:relative grid grid-flow-col grid-cols-${
+              data.length + 1
+            } gap-4`}
           >
+            <div
+              className=" tab hidden sm:block bg-green-900 rounded-lg"
+              onClick={() => (location.href = "/")}
+            >
+              {"<"}
+            </div>
             {data.map((skill, index) => (
               <div
                 key={index}
@@ -59,70 +67,64 @@ export default function Hero({ params }: { params: { heroName: string } }) {
         )}
 
         {data.length > 0 && (
-          <div className="bg-cyan-200 bg-opacity-50 rounded-lg grid md:grid-cols-2 gap-4">
-            <div className="flex flex-col gap-4">
-              <div className="p-4 -mx-4 bg-red-800 border border-white">
-                {data[activeTab].name} {heroName}
-              </div>
-              <div className="skill">
-                <div className="skill__title bg-blue-900">
-                  {data[activeTab].attack.name}
-                </div>
-                <div className="skill__attack">
-                  <div className="skill__attack__slot">
-                    {data[activeTab].attack.type}
-                  </div>
-                  <div className="skill__attack__slot">
-                    {data[activeTab].attack.range}
-                  </div>
-                  <div className="skill__attack__slot">
-                    {data[activeTab].attack.dice}
-                  </div>
-                  <div className="skill__attack__slot">
-                    {data[activeTab].attack.accuracy}
-                  </div>
-                </div>
-              </div>
-              {data[activeTab].name.includes("Zombie") && (
-                <div>
-                  <div className="px-4 py-2 bg-green-800 border border-white">
-                    Devour
+          <div className="bg-cyan-200 bg-opacity-50 rounded-lg grid ">
+            <div className="p-4 -mx-4 bg-red-800 border border-white">
+              {data[activeTab].name} {heroName}
+            </div>
+            <div className="grid md:grid-cols-2 py-4 gap-4">
+              <div className="flex flex-col gap-4">
+                <div className="skill">
+                  <div className="skill__title bg-blue-900">
+                    {data[activeTab].attack.name}
                   </div>
                   <div className="skill__attack">
-                    <div className="skill__attack__slot">Melee</div>
-                    <div className="skill__attack__slot">0</div>
-                    <div className="skill__attack__slot">1</div>
-                    <div className="skill__attack__slot">4+</div>
+                    <div className="skill__attack__slot">
+                      {data[activeTab].attack.type}
+                    </div>
+                    <div className="skill__attack__slot">
+                      {data[activeTab].attack.range}
+                    </div>
+                    <div className="skill__attack__slot">
+                      {data[activeTab].attack.dice}
+                    </div>
+                    <div className="skill__attack__slot">
+                      {data[activeTab].attack.accuracy}
+                    </div>
                   </div>
-                  {!!data[activeTab].devour?.effect && (
-                    <div className="skill__attack__desc mx-2 my-1">
-                      {data[activeTab].devour?.effect}
-                    </div>
-                  )}
                 </div>
-              )}
-            </div>
-            <div className="grid gap-4">
-              {data[activeTab].levels.map((level, index) => {
-                if (level.name === "")
-                  return (
-                    <div key={index} className="skill">
-                      <div className={`skill__title ${colors[index]}`}>
-                        + {level.info}
-                      </div>
+                {data[activeTab].name.includes("Zombie") && (
+                  <div>
+                    <div className="px-4 py-2 bg-green-800 border border-white">
+                      Devour
                     </div>
-                  );
-                return (
+                    <div className="skill__attack">
+                      <div className="skill__attack__slot">Melee</div>
+                      <div className="skill__attack__slot">0</div>
+                      <div className="skill__attack__slot">1</div>
+                      <div className="skill__attack__slot">4+</div>
+                    </div>
+                    {!!data[activeTab].devour?.effect && (
+                      <div className="skill__attack__desc mx-2 my-1">
+                        {data[activeTab].devour?.effect}
+                      </div>
+                    )}
+                  </div>
+                )}
+              </div>
+              <div className="grid gap-4">
+                {data[activeTab].levels.map((level, index) => (
                   <div key={index} className="skill">
                     <div className={`skill__title ${colors[index]}`}>
                       {level.name}
                     </div>
-                    <div className="skill__ability">
-                      <div className="skill__ability__slot">{level.info}</div>
-                    </div>
+                    {level.info && (
+                      <div className="skill__ability">
+                        <div className="skill__ability__slot">{level.info}</div>
+                      </div>
+                    )}
                   </div>
-                );
-              })}
+                ))}
+              </div>
             </div>
           </div>
         )}
