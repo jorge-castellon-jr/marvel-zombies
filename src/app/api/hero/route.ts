@@ -1,24 +1,6 @@
 import { load, Element } from "cheerio";
 import type { NextApiRequest, NextApiResponse } from "next";
-
-export interface HeroSection {
-  name: string;
-  levels: Level[];
-  attack: Attack;
-  devour?: Attack;
-}
-interface Level {
-  name: string;
-  info: string;
-}
-interface Attack {
-  name: string;
-  type: string;
-  range: string;
-  dice: string;
-  accuracy: string;
-  effect?: string;
-}
+import { HeroSection, Level } from "../../../../types/HeroTypes";
 
 const getHeroSkills = async (hero: string): Promise<HeroSection[]> => {
   const url = `https://zombicide.fandom.com/wiki/${hero}`;

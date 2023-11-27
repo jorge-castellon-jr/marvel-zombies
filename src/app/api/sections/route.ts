@@ -1,22 +1,5 @@
 import { load, Element } from "cheerio";
-import { log } from "console";
-
-export interface Section {
-  boxName: string;
-  boxImage: string;
-  heroes: Hero[];
-}
-interface Hero {
-  name: string;
-  image: string;
-  link: string;
-  type: HeroType;
-}
-
-export enum HeroType {
-  Hero = "Hero",
-  Zombie = "Zombie",
-}
+import { HeroType, Section } from "../../../../types/HeroTypes";
 
 const getSections = async (): Promise<Section[]> => {
   const url = "https://zombicide.fandom.com/wiki/Marvel_Zombies_Heroes";
@@ -57,7 +40,7 @@ const getSections = async (): Promise<Section[]> => {
             link: $(survivor)
               .find("a")
               .attr("href")
-              ?.replace("/wiki", "/hero") as string,
+              ?.replace("/wiki", "/marvel") as string,
             type: survivorImage.attr("data-image-name")?.includes("zombie")
               ? HeroType.Zombie
               : HeroType.Hero,

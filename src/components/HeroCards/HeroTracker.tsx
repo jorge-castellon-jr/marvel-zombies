@@ -4,14 +4,16 @@ import { useEffect, useState } from "react";
 
 export default function HeroTracker({
   label,
+  max,
   start,
 }: {
   label: string;
+  max: number;
   start: number;
 }) {
   const [activeTracker, setActiveTracker] = useState(0);
 
-  const trackers = Array.from({ length: 6 }, (_, index) => index);
+  const trackers = Array.from({ length: max + 1 }, (_, index) => index);
 
   const handleClick = (index: number) => {
     setActiveTracker(index);

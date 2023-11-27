@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
-import { HeroSection } from "@/app/api/hero/route";
 import HeroTracker from "@/components/HeroCards/HeroTracker";
+import { HeroSection } from "../../../../types/HeroTypes";
 
 export default function Hero({ params }: { params: { heroName: string } }) {
   // get the data from the api from api scraper route
@@ -72,13 +72,14 @@ export default function Hero({ params }: { params: { heroName: string } }) {
             <div className="p-4 -mx-4 bg-red-800 border border-white">
               {data[activeTab].name} {heroName}
             </div>
-            <div className="grid md:grid-cols-2 py-4 gap-4">
+            <div className="grid md:grid-cols-2 py-2 gap-4">
               <div className="flex flex-col gap-4">
-                <HeroTracker label="Health" start={5} />
+                <HeroTracker label="Health" max={5} start={5} />
                 <HeroTracker
                   label={
                     data[activeTab].name.includes("Zombie") ? "Hunger" : "Power"
                   }
+                  max={4}
                   start={0}
                 />
                 <div className="skill">

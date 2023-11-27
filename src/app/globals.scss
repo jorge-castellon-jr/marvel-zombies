@@ -41,7 +41,7 @@ body {
   &__ability {
     @apply grid gap-1 mx-2;
     &__slot {
-      @apply bg-amber-50 text-gray-800 p-2 rounded-b-md;
+      @apply bg-amber-50 text-gray-800 p-2 rounded-b-lg;
     }
     &__desc {
       @apply bg-amber-50 text-gray-800 p-2;

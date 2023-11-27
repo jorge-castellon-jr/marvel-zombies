@@ -1,8 +1,8 @@
 "use client";
 import { useEffect, useState } from "react";
-import { HeroType, Section } from "./api/sections/route";
 import Tabs from "@/components/Tabs";
 import BoxSection from "@/components/Sections/BoxSections";
+import { HeroType, Section } from "../../types/HeroTypes";
 
 export default function Home() {
   // get the data from the api from api scraper route
