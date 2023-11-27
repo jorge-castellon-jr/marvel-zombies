@@ -1,6 +1,6 @@
-import { Section } from "@/app/api/sections/route";
 import Image from "next/image";
 import HeroIcons from "./HeroIcons";
+import { Section } from "../../../types/HeroTypes";
 
 export default function BoxSections({ sections }: { sections: Section[] }) {
   return (

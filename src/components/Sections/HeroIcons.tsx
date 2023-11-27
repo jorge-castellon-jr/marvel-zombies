@@ -1,5 +1,5 @@
-import { HeroType, Section } from "@/app/api/sections/route";
 import Image from "next/image";
+import { HeroType, Section } from "../../../types/HeroTypes";
 
 export default function HeroIcons({ heroes }: { heroes: Section["heroes"] }) {
   return (
