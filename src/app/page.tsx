@@ -53,7 +53,15 @@ export default function Home() {
 
   return (
     <div className="wrapper p-4 ">
+      <a
+        href="/pick-your-team"
+        className="block p-4 bg-green-900 rounded-lg text-center"
+      >
+        Pick Your Team
+      </a>
+
       <Tabs list={tabList} active={heroType} />
+
       <div className="sections grid gap-8">
         <BoxSection sections={filteredSections} />
       </div>

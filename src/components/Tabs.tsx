@@ -12,7 +12,7 @@ export default function Tabs({
 }) {
   return (
     <div
-      className={`hero-tabs order-last md:order-first md:relative grid grid-flow-col grid-cols-3 gap-4`}
+      className={`hero-tabs order-last md:order-first md:relative grid grid-flow-col grid-cols-${list.length} gap-4`}
     >
       {list &&
         list.map((item) => (
