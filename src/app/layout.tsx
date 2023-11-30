@@ -16,7 +16,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={`${inter.className} max-w-3xl mx-auto`}>
         <h1 className="text-5xl grid place-items-center my-6">
           Marvel Zombies
         </h1>

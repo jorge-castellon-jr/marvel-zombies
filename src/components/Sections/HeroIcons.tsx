@@ -6,7 +6,7 @@ export default function HeroIcons({ heroes }: { heroes: Section["heroes"] }) {
     <ul className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-6 gap-4 ">
       {heroes.map((hero) => (
         <li key={`${hero.name}-${hero.type}`}>
-          <a href={hero.link}>
+          <a href={`${hero.link}?type=${hero.type}`}>
             <Image
               src={hero.image}
               alt={hero.name}

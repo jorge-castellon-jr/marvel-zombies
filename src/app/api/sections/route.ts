@@ -1,5 +1,5 @@
 import { load, Element } from "cheerio";
-import { HeroType, Section } from "../../../../types/HeroTypes";
+import { Hero, HeroType, Section } from "../../../../types/HeroTypes";
 
 const getSections = async (): Promise<Section[]> => {
   const url = "https://zombicide.fandom.com/wiki/Marvel_Zombies_Heroes";
@@ -30,20 +30,24 @@ const getSections = async (): Promise<Section[]> => {
       heroes: $(section)
         .find(".survivor-table")
         .toArray()
-        .map((survivor) => {
+        .map((survivor): Hero => {
           const survivorImage = $(survivor).find("img");
+          const name = $(survivor).find("a").attr("title")!;
+          const image =
+            survivorImage.attr("data-src")! || survivorImage.attr("src")!;
+          const link = $(survivor)
+            .find("a")
+            .attr("href")!
+            .replace("/wiki", "/marvel");
+          const type = survivorImage.attr("data-image-name")!.includes("zombie")
+            ? HeroType.Zombie
+            : HeroType.Hero;
+
           return {
-            name: $(survivor).find("a").attr("title") as string,
-            image:
-              (survivorImage.attr("data-src") as string) ||
-              (survivorImage.attr("src") as string),
-            link: $(survivor)
-              .find("a")
-              .attr("href")
-              ?.replace("/wiki", "/marvel") as string,
-            type: survivorImage.attr("data-image-name")?.includes("zombie")
-              ? HeroType.Zombie
-              : HeroType.Hero,
+            name,
+            image,
+            link,
+            type,
           };
         }),
     };

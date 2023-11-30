@@ -1,11 +1,14 @@
 "use client";
 import { useEffect, useState } from "react";
 import HeroTracker from "@/components/HeroCards/HeroTracker";
-import { HeroSection } from "../../../../types/HeroTypes";
+import { Hero, HeroSection } from "../../../../types/HeroTypes";
+import { useSearchParams } from "next/navigation";
 
 export default function Hero({ params }: { params: { heroName: string } }) {
+  const query = useSearchParams();
   // get the data from the api from api scraper route
   const [data, setData] = useState<HeroSection[]>([]);
+  const [activeTab, setActiveTab] = useState(0);
 
   // fetch the data from the api
   useEffect(() => {
@@ -19,12 +22,17 @@ export default function Hero({ params }: { params: { heroName: string } }) {
       });
       const newData = await res.json();
 
+      // find index of the type that matches the query
+      const index = newData.findIndex((item: HeroSection) => {
+        return item.name.includes(query.get("type")!);
+      });
+
+      setActiveTab(index);
+
       setData(newData);
     };
     fetchData();
-  }, [params.heroName]);
-
-  const [activeTab, setActiveTab] = useState(0);
+  }, [params.heroName, query]);
 
   const colors = [
     "bg-cyan-700",
