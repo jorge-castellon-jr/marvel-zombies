@@ -8,6 +8,7 @@ export interface Hero {
   image: string;
   link: string;
   type: HeroType;
+  active?: boolean;
 }
 
 export enum HeroType {

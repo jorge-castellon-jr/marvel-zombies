@@ -1,8 +1,9 @@
 "use client";
 import { useEffect, useState } from "react";
 import Tabs from "@/components/Tabs";
-import { Hero, HeroType } from "../../../types/HeroTypes";
+import { Hero, HeroSection, HeroType } from "../../../types/HeroTypes";
 import HeroIcons from "@/components/PickYourTeam/HeroIcons";
+import HeroCard from "@/components/HeroCards/HeroCard";
 
 export default function Home() {
   // get the data from the api from api scraper route
@@ -10,20 +11,42 @@ export default function Home() {
   // useState to switch between hero types
   const [heroType, setHeroType] = useState<HeroType | null>(null);
   const [filteredHeroes, setFilteredHeroes] = useState<Hero[]>([]);
-  const [pickedHeroes, setPickedHeroes] = useState<Hero[]>([]);
+  const [pickedHeroes, setPickedHeroes] = useState<
+    { icon: Hero; info: HeroSection }[]
+  >([]);
 
-  const selectPickHero = (hero: Hero) => {
+  const [heroDoesNotExist, setHeroDoesNotExist] = useState(false);
+
+  const selectPickHero = async (hero: Hero) => {
     // if hero is already picked, deselect it
     const alreadyPicked = pickedHeroes.find(
-      (pickedHero) => pickedHero.name === hero.name
+      (pickedHero) => pickedHero.icon.name === hero.name
     );
     if (!alreadyPicked && pickedHeroes.length < 6) {
-      setPickedHeroes([...pickedHeroes, hero]);
+      const res = await fetch("/api/hero", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ hero: hero.link.split("/").pop() }),
+      });
+      const newData = await res.json();
+      if (!newData.length) {
+        setTimeout(() => setHeroDoesNotExist(false), 3000);
+        return setHeroDoesNotExist(true);
+      }
+      setPickedHeroes([
+        ...pickedHeroes,
+        {
+          icon: hero,
+          info: newData.find((item: HeroSection) => item.name === hero.type),
+        },
+      ]);
     }
   };
   const deselectPickHero = (hero: Hero) => {
     const filteredHeroes = pickedHeroes.filter(
-      (pickedHero) => pickedHero.name !== hero.name
+      (pickedHero) => pickedHero.icon.name !== hero.name
     );
     setPickedHeroes(filteredHeroes);
   };
@@ -68,11 +91,16 @@ export default function Home() {
       <div className="sections grid gap-8">
         {!!pickedHeroes.length && (
           <>
-            Picked Heroes
+            <div>Picked Heroes (Click to Remove them)</div>
             <HeroIcons
-              heroes={pickedHeroes}
+              heroes={pickedHeroes.map((hero) => ({ ...hero.icon }))}
               selectPickHero={deselectPickHero}
             />
+            {pickedHeroes.map((hero) => (
+              <div key={hero.icon.name}>
+                <HeroCard heroInfo={hero.info} heroName={hero.icon.name} />
+              </div>
+            ))}
           </>
         )}
         All Heroes
@@ -82,6 +110,11 @@ export default function Home() {
           selectPickHero={selectPickHero}
         />
       </div>
+      {heroDoesNotExist && (
+        <div className="toast bg-red-700 text-white p-4 rounded-lg fixed bottom-4 right-4">
+          Hero does not exist in our database
+        </div>
+      )}
     </div>
   );
 }

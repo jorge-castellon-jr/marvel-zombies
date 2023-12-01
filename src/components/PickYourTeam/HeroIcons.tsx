@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { Hero, HeroType } from "../../../types/HeroTypes";
+import { Hero, HeroSection, HeroType } from "../../../types/HeroTypes";
 
 export default function HeroIcons({
   heroes,
@@ -7,14 +7,16 @@ export default function HeroIcons({
   selectPickHero,
 }: {
   heroes: Hero[];
-  pickedHeroes?: Hero[];
+  pickedHeroes?: { icon: Hero; info: HeroSection }[];
   selectPickHero: (hero: Hero) => void;
 }) {
   // if pickedHeroes is defined, set class of active to all heroes in pickedHeroes
   if (pickedHeroes) {
     heroes = heroes.map((hero) => {
       const pickedHero = pickedHeroes.find(
-        (pickedHero) => pickedHero.name === hero.name
+        (pickedHero) =>
+          pickedHero.icon.name === hero.name &&
+          hero.type === pickedHero.info.name
       );
       if (pickedHero) {
         return {
@@ -31,6 +33,7 @@ export default function HeroIcons({
         <li
           key={`${hero.name}-${hero.type}-${index}`}
           onClick={() => selectPickHero(hero)}
+          className={hero.active ? "opacity-50" : "cursor-pointer"}
         >
           <Image
             src={hero.image}
