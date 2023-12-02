@@ -5,9 +5,11 @@ import { HeroSection } from "../../../types/HeroTypes";
 export default function Hero({
   heroInfo,
   heroName,
+  closeAction,
 }: {
   heroInfo: HeroSection;
   heroName: string;
+  closeAction?: () => void;
 }) {
   const colors = [
     "bg-cyan-700",
@@ -18,8 +20,18 @@ export default function Hero({
 
   return (
     <div className="bg-cyan-200 bg-opacity-50 rounded-lg grid ">
-      <div className="p-4 -mx-4 bg-red-800 border border-white sticky top-0">
-        {heroInfo.name} {heroName}
+      <div className="p-4 -mx-4 bg-red-800 border border-white sticky top-0 flex justify-between items-center">
+        <div>
+          {heroInfo.name} {heroName}
+        </div>
+        {closeAction && (
+          <div
+            className="cursor-pointer bg-opacity-25 bg-black h-6 w-6 rounded-lg grid place-items-center"
+            onClick={closeAction}
+          >
+            X
+          </div>
+        )}
       </div>
       <div className="grid md:grid-cols-2 py-2 gap-4">
         <div className="flex flex-col gap-4">

@@ -91,14 +91,14 @@ export default function Home() {
       <div className="sections grid gap-8">
         {!!pickedHeroes.length && (
           <>
-            <div>Picked Heroes (Click to Remove them)</div>
-            <HeroIcons
-              heroes={pickedHeroes.map((hero) => ({ ...hero.icon }))}
-              selectPickHero={deselectPickHero}
-            />
+            <div>Picked Heroes</div>
             {pickedHeroes.map((hero) => (
               <div key={hero.icon.name}>
-                <HeroCard heroInfo={hero.info} heroName={hero.icon.name} />
+                <HeroCard
+                  heroInfo={hero.info}
+                  heroName={hero.icon.name}
+                  closeAction={() => deselectPickHero(hero.icon)}
+                />
               </div>
             ))}
           </>
