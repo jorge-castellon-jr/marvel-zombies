@@ -11,9 +11,15 @@ export default function Home() {
   const [heroType, setHeroType] = useState<HeroType | null>(null);
   const [filteredSections, setFilteredSections] = useState<Section[]>([]);
 
+  const [allData, setAllData] = useState<any>({});
+
   // fetch the data from the api
   useEffect(() => {
     const fetchData = async () => {
+      const all = await fetch("/api/all");
+      const allData = await all.json();
+      setAllData(allData);
+
       const res = await fetch("/api/sections");
       const newData = await res.json();
       setSections(newData);
