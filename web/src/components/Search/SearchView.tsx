@@ -1,6 +1,6 @@
 "use client";
 import { PageId } from "@/store/AppStore";
-import SearchInput from "../SearchInput";
+import SearchInput from "./SearchInput";
 import { useApp } from "@/app/useApp";
 import BoxCollectionSectionIcon from "../BoxCollection/BoxCollectionSectionIcon";
 import { HeroType } from "@/types/HeroTypes";

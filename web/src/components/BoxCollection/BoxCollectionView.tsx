@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useApp } from "@/app/useApp";
 import { AppData, GameUniverse, PageId } from "@/store/AppStore";
 import BoxCollectionSection from "./BoxCollectionSection";
-import SearchInput from "../SearchInput";
+import SearchInput from "../Search/SearchInput";
 
 export default function BoxCollectionView({
 	data: { marvel_zombies, dceased },
