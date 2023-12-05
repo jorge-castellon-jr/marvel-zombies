@@ -5,7 +5,7 @@ import HeroCard from "./HeroCard";
 import Image from "next/image";
 
 export default function HeroCardView() {
-	const { heroSelected, pageId, setPageId } = useApp();
+	const { heroSelected, pageId, setPageId, setSearch } = useApp();
 
 	const hasImage = !!heroSelected.hero
 		? heroSelected.hero.character_image_url
@@ -28,7 +28,10 @@ export default function HeroCardView() {
 		>
 			<a
 				className="block p-4 bg-green-900 rounded-lg text-center"
-				onClick={() => setPageId(PageId.BoxCollection)}
+				onClick={() => {
+					setSearch("");
+					setPageId(PageId.BoxCollection);
+				}}
 			>
 				Back
 			</a>

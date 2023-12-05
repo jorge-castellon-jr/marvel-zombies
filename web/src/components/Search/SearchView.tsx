@@ -1,11 +1,12 @@
-import { GameUniverse, PageId } from "@/store/AppStore";
+import { PageId } from "@/store/AppStore";
 import SearchInput from "../SearchInput";
 import { useApp } from "@/app/useApp";
 import BoxCollectionSectionIcon from "../BoxCollection/BoxCollectionSectionIcon";
 import { HeroType } from "@/types/HeroTypes";
 
 export default function SearchView() {
-	const { pageId, setPageId, searchResults, setHeroSelected } = useApp();
+	const { pageId, setPageId, setSearch, searchResults, setHeroSelected } =
+		useApp();
 
 	return (
 		<div
@@ -15,7 +16,10 @@ export default function SearchView() {
 		>
 			<a
 				className="block p-4 bg-green-900 rounded-lg text-center"
-				onClick={() => setPageId(PageId.BoxCollection)}
+				onClick={() => {
+					setSearch("");
+					setPageId(PageId.BoxCollection);
+				}}
 			>
 				Back
 			</a>

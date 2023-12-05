@@ -14,9 +14,7 @@ export default function SearchInput({
 	onClick?: () => void;
 	autoFocus?: boolean;
 }) {
-	const [search, setSearch] = useState("");
-
-	const { pageId, appData, setSearchResults } = useApp();
+	const { pageId, appData, search, setSearch, setSearchResults } = useApp();
 
 	useEffect(() => {
 		const filterData = () => {
@@ -76,7 +74,14 @@ export default function SearchInput({
 				value={search}
 				autoFocus={autoFocus}
 				onChange={(e) => setSearch(e.target.value)}
-				onClick={onClick ? () => onClick() : () => null}
+				onClick={
+					onClick
+						? () => {
+								setSearch("");
+								onClick();
+						  }
+						: () => null
+				}
 			/>
 		</div>
 	);

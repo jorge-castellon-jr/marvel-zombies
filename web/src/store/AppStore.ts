@@ -83,4 +83,5 @@ export type SearchResults = CharacterData & {
 
 export const useHeroSelection = atom<HeroSelection>({} as HeroSelection);
 
+export const useSearch = atom<string>("");
 export const useSearchResults = atom<SearchResults[]>([]);
