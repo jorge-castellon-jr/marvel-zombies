@@ -28,6 +28,7 @@ export default function SearchView() {
 						type={
 							result.searchType == "heroes" ? HeroType.Hero : HeroType.Zombie
 						}
+						image={result.character_thumbnail}
 						onClick={() => {
 							setHeroSelected({
 								hero: result,

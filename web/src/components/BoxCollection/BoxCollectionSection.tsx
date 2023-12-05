@@ -29,6 +29,7 @@ export default function BoxCollectionSection({
 						key={hero.character_name}
 						name={hero.character_name}
 						type={HeroType.Hero}
+						image={hero.character_thumbnail}
 						onClick={() => {
 							setHeroSelected({ hero, type: "heroes", gameUniverse });
 							setPageId(PageId.HeroDetails);
@@ -39,6 +40,7 @@ export default function BoxCollectionSection({
 					<BoxCollectionSectionIcon
 						key={zombie.character_name}
 						name={zombie.character_name}
+						image={zombie.character_thumbnail}
 						type={HeroType.Zombie}
 						onClick={() => {
 							setHeroSelected({

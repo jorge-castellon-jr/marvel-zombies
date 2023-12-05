@@ -45,7 +45,7 @@ const getSections = async (): Promise<Section[]> => {
 
 					return {
 						name,
-						image,
+						image: image.split("/revision")[0],
 						link,
 						type,
 					};

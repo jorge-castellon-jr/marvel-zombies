@@ -16,6 +16,7 @@ interface BaseData {
 	set: string;
 	ks_exclusive: string;
 	character_image_url: string;
+	character_thumbnail: string;
 }
 export interface CharacterData extends BaseData {
 	alt_sculpt: string;
