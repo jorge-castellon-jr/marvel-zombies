@@ -68,7 +68,7 @@ interface CharacterData {
 	orange_skill_description: string;
 	red_skill_name: string;
 	red_skill_description: string;
-	spawn_ability: string;
+	spawn_card_ability: string;
 	toughness: string;
 	character_image_url: string;
 }
@@ -98,7 +98,7 @@ const getSet = async (address: string, tab: string, nameSpace: KVNamespace) => {
 		return modifiedRow;
 	});
 
-	const completeData = data.filter((hero) => !!hero.attack);
+	const completeData = data.filter((hero) => !!hero.attack || !!hero.spawn_card_ability);
 
 	await nameSpace.put(tab.toLowerCase(), JSON.stringify(completeData));
 };

@@ -60,7 +60,6 @@ export default function BoxCollectionView({
 							set={set}
 							data={marvel_zombies}
 							gameUniverse={GameUniverse.MarvelZombies}
-							allowZombiesHeroes
 						/>
 					))}
 				{dceased &&

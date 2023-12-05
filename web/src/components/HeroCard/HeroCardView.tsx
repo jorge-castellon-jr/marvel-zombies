@@ -18,6 +18,8 @@ export default function HeroCardView() {
 		? heroSelected.hero.spawn_card_ability
 		: false;
 
+	const hasAttack = !!heroSelected.hero ? heroSelected.hero.attack : false;
+
 	return (
 		<div
 			className={`gap-8 grid view ${
@@ -59,8 +61,7 @@ export default function HeroCardView() {
 						<p className="text-white">{heroSelected.hero.spawn_card_ability}</p>
 					</div>
 				)}
-
-				<HeroCard hero={heroSelected} />
+				{hasAttack && <HeroCard hero={heroSelected} />}
 			</div>
 		</div>
 	);
