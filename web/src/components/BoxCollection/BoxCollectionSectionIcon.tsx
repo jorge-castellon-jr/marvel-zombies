@@ -20,7 +20,9 @@ export default function BoxCollectionSectionIcon({
 		>
 			{image && <Image src={image} width={100} height={100} alt="Hero Image" />}
 			<div
-				className={`px-2 w-full h-full text-center grid justify-center items-center text-sm md:text-base`}
+				className={`${
+					!image && "h-28"
+				} px-2 w-full h-full text-center grid justify-center items-center text-sm md:text-base`}
 			>
 				{name}
 			</div>
