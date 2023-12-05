@@ -2,9 +2,14 @@ name = "zombicide-api"
 main = "src/index.ts"
 compatibility_date = "2023-05-18"
 compatibility_flags = [ "nodejs_compat" ]
+kv_namespaces = [
+  { binding = "marvel_zombies", id = "e4db684085214e5fa3884a4c2164abed" },
+  { binding = "dceased", id = "760ceda294c44a0ab5a6ca453051a1dc" },
+  { binding = "custom_heroes", id = "34a10e441a8445bba1e5c9e7d369298a" }
+]
 
 # Cron Triggers
 # Docs: https://developers.cloudflare.com/workers/platform/triggers/cron-triggers/
 # Configuration: https://developers.cloudflare.com/workers/wrangler/configuration/#triggers
 [triggers]
-crons = ["* * * * *"] # 0 0 * * * = run at midnight
+crons = ["0 0 * * *"] # 0 0 * * * = run at midnight

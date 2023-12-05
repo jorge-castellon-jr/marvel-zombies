@@ -1,5 +1,5 @@
 "use client";
-import HeroTracker from "@/components/HeroCards/HeroTracker";
+import HeroTracker from "@/components/HeroCard/HeroTracker";
 import { HeroSection } from "../../types/HeroTypes";
 
 export default function Hero({

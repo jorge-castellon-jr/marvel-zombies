@@ -6,6 +6,7 @@ export enum PageId {
 	Dceased,
 	CustomHeroes,
 	PickTeam,
+	HeroDetails,
 }
 
 export const usePageId = atom<PageId>(PageId.Home);
@@ -23,6 +24,7 @@ export interface CharacterData extends BaseData {
 	range: string;
 	dice: string;
 	to_hit: string;
+	devour_effect: string;
 	blue_skill_name: string;
 	blue_skill_description: string;
 	yellow_skill_name: string;
@@ -31,8 +33,9 @@ export interface CharacterData extends BaseData {
 	orange_skill_description: string;
 	red_skill_name: string;
 	red_skill_description: string;
-	spawn_ability: string;
+	spawn_card_ability: string;
 	toughness: string;
+	short_description: string;
 }
 export interface BystanderData extends BaseData {
 	ability: string;
@@ -60,3 +63,16 @@ export interface AppData {
 }
 
 export const useAppData = atom<AppData>({} as AppData);
+
+export enum GameUniverse {
+	MarvelZombies = "Marvel Zombies",
+	DCeased = "DCeased",
+}
+
+export interface HeroSelection {
+	gameUniverse: GameUniverse;
+	type: "heroes" | "zombies";
+	hero: CharacterData;
+}
+
+export const useHeroSelection = atom<HeroSelection>({} as HeroSelection);

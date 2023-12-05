@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import Tabs from "@/components/Tabs";
 import { Hero, HeroSection, HeroType } from "../../types/HeroTypes";
 import HeroIcons from "@/components/PickYourTeam/HeroIcons";
-import HeroCard from "@/components/HeroCards/HeroCard";
+import HeroCard from "@/components/HeroCard/HeroCardOld";
 
 export default function Home() {
 	// get the data from the api from api scraper route

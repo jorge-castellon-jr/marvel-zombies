@@ -1,9 +1,9 @@
 "use client";
 import { useEffect, useState } from "react";
-import HeroTracker from "@/components/HeroCards/HeroTracker";
+import HeroTracker from "@/components/HeroCard/HeroTracker";
 import { Hero, HeroSection } from "../../../types/HeroTypes";
 import { useSearchParams } from "next/navigation";
-import HeroCard from "@/components/HeroCards/HeroCard";
+import HeroCard from "@/components/HeroCard/HeroCardOld";
 
 export default function Hero({ params }: { params: { heroName: string } }) {
 	const query = useSearchParams();

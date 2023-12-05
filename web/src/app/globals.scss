@@ -3,34 +3,41 @@
 @tailwind utilities;
 
 body {
-  @apply bg-gray-900 text-white;
+	@apply bg-gray-800 text-white;
+}
+
+.view {
+	@apply hidden;
+	&.view--active {
+		@apply grid;
+	}
 }
 
 .hero-tabs {
-  @apply sticky bottom-0 bg-gray-900 py-4;
-  .tab {
-    @apply grid place-items-center;
-  }
+	@apply sticky bottom-0 bg-gray-800 py-4;
+	.tab {
+		@apply grid place-items-center;
+	}
 }
 
 .skill {
-  &__title {
-    @apply px-4 py-2 border border-white;
-  }
-  &__attack,
-  &__ability {
-    @apply grid gap-1 mx-2;
-    &__slot {
-      @apply bg-amber-50 text-gray-800 p-2 rounded-b-lg;
-    }
-    &__desc {
-      @apply bg-amber-50 text-gray-800 p-2 rounded-lg;
-    }
-  }
-  &__attack {
-    @apply grid-cols-4;
-    &__slot {
-      @apply py-4 text-center;
-    }
-  }
+	&__title {
+		@apply px-4 py-2 border border-white;
+	}
+	&__attack,
+	&__ability {
+		@apply grid gap-1 mx-2;
+		&__slot {
+			@apply bg-amber-50 text-gray-800 p-2 rounded-b-lg;
+		}
+		&__desc {
+			@apply bg-amber-50 text-gray-800 p-2 rounded-lg;
+		}
+	}
+	&__attack {
+		@apply grid-cols-4;
+		&__slot {
+			@apply py-4 text-center;
+		}
+	}
 }

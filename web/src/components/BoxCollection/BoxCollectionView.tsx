@@ -1,10 +1,7 @@
 "use client";
-import { useEffect, useState } from "react";
-import Tabs from "@/components/Tabs";
-import BoxSection from "@/components/Sections/BoxSections";
+import { useState } from "react";
 import { useApp } from "@/app/useApp";
-import { Section, HeroType } from "../../types/HeroTypes";
-import { AppData, CharacterData } from "@/store/AppStore";
+import { AppData, GameUniverse, PageId } from "@/store/AppStore";
 import BoxCollectionSection from "./BoxCollectionSection";
 
 export default function BoxCollectionView({
@@ -12,65 +9,67 @@ export default function BoxCollectionView({
 }: {
 	data: AppData;
 }) {
-	enum GameUniverse {
-		MarvelZombies = "Marvel Zombies",
-		DCeased = "DCeased",
-	}
-	const [gameUniverse, setGameUniverse] = useState<GameUniverse | null>(null);
+	const [gameUniverse, setGameUniverse] = useState<GameUniverse | null>(
+		GameUniverse.MarvelZombies
+	);
 
-	const toggleGameUniverse = (newGameUniverse: GameUniverse) => {
-		newGameUniverse == gameUniverse
-			? setGameUniverse(null)
-			: setGameUniverse(newGameUniverse);
-	};
+	const isMarvelZombies = gameUniverse == GameUniverse.MarvelZombies;
+	const isDCeased = gameUniverse == GameUniverse.DCeased;
 
-	const tabList = [
-		{
-			id: GameUniverse.MarvelZombies,
-			label: GameUniverse.MarvelZombies,
-			action: () => toggleGameUniverse(GameUniverse.MarvelZombies),
-		},
-		{
-			id: GameUniverse.DCeased,
-			label: GameUniverse.DCeased,
-			action: () => toggleGameUniverse(GameUniverse.DCeased),
-		},
-	];
-
-	const isMarvelZombies =
-		gameUniverse == GameUniverse.MarvelZombies || gameUniverse == null;
-	const isDCeased =
-		gameUniverse == GameUniverse.DCeased || gameUniverse == null;
+	const { pageId, setPageId } = useApp();
 
 	return (
-		<div className="p-4">
-			<div>
-				Filters:
-				<Tabs list={tabList} active={gameUniverse} />
+		<div
+			className={`p-4 view gap-8 ${
+				pageId == PageId.MarvelZombies && "view--active"
+			}`}
+		>
+			<a
+				className="block p-4 bg-green-900 rounded-lg text-center"
+				onClick={() => setPageId(PageId.Home)}
+			>
+				Back
+			</a>
+			<div className="grid grid-cols-2 border-2 p-2 rounded-lg border-slate-700 gap-2">
+				<button
+					className={`${
+						isMarvelZombies && "bg-slate-700"
+					}  rounded-lg border-gray-800 text-xl text-center py-4 px-2`}
+					onClick={() => setGameUniverse(GameUniverse.MarvelZombies)}
+				>
+					Marvel Zombies
+				</button>
+				<button
+					className={`${
+						isDCeased && "bg-slate-700"
+					}  rounded-lg border-gray-800 text-xl text-center py-4 px-2`}
+					onClick={() => setGameUniverse(GameUniverse.DCeased)}
+				>
+					DCeased
+				</button>
 			</div>
 			<div className="grid gap-8">
-				{isMarvelZombies && (
-					<div className="w-full border-b border-gray-800 text-3xl text-center p-4">
-						Marvel Zombies
-					</div>
-				)}
+				{/* {JSON.stringify(heroSelected)} */}
 				{marvel_zombies &&
 					isMarvelZombies &&
 					marvel_zombies.sets.map((set: string) => (
-						<BoxCollectionSection key={set} set={set} data={marvel_zombies} />
+						<BoxCollectionSection
+							key={set}
+							set={set}
+							data={marvel_zombies}
+							gameUniverse={GameUniverse.MarvelZombies}
+							allowZombiesHeroes
+						/>
 					))}
-				<div className="w-full border-b border-gray-800 text-3xl text-center p-4">
-					Dceased
-				</div>
 				{dceased &&
 					isDCeased &&
 					dceased.sets.map((set: string) => (
-						<div key={set}>
-							<div className="flex justify-center items-center w-full bg-slate-800 rounded-lg px-4 py-8 text-lg font-bold uppercase shadow-lg">
-								{set}
-							</div>
-							<div className="grid grid-cols-4 gap-4"></div>
-						</div>
+						<BoxCollectionSection
+							key={set}
+							set={set}
+							data={dceased}
+							gameUniverse={GameUniverse.DCeased}
+						/>
 					))}
 			</div>
 		</div>

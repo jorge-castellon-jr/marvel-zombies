@@ -6,6 +6,7 @@ import { HeroType, Section } from "@/types/HeroTypes";
 import { useApp } from "./useApp";
 import { AppData, PageId } from "@/store/AppStore";
 import BoxCollectionView from "@/components/BoxCollection/BoxCollectionView";
+import HeroCardView from "@/components/HeroCard/HeroCardView";
 
 export default function Home() {
 	// get the data from the api from api scraper route
@@ -61,31 +62,37 @@ export default function Home() {
 	];
 
 	// new single page app changes
-	const { pageId, setPageId, appData } = useApp();
-	if (window.location.href.includes("localhost")) {
-		setPageId(PageId.MarvelZombies);
-	}
+	const { pageId, setPageId } = useApp();
 
 	return (
 		<>
 			{allData && (
 				<>
+					<BoxCollectionView data={allData} />
+					<HeroCardView data={allData} />
 					{pageId == PageId.Home && (
-						<div className="wrapper p-4 ">
+						<div
+							className={`wrapper p-4 grid gap-4 view ${
+								pageId == PageId.Home && "view--active"
+							}`}
+						>
 							<a
 								href="/pick-your-team"
 								className="block p-4 bg-green-900 rounded-lg text-center"
 							>
 								Pick Your Team
 							</a>
+							<a
+								className="block p-4 bg-green-900 rounded-lg text-center"
+								onClick={() => setPageId(PageId.MarvelZombies)}
+							>
+								New App Redesign
+							</a>
 							<Tabs list={tabList} active={heroType} />
 							<div className="sections grid gap-8">
 								<BoxSection sections={filteredSections} />
 							</div>
 						</div>
-					)}
-					{allData && pageId == PageId.MarvelZombies && (
-						<BoxCollectionView data={allData} />
 					)}
 				</>
 			)}

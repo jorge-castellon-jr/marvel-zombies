@@ -1,30 +1,33 @@
 import { Hono } from 'hono';
 import SaveToKV from './GET/SaveToKV';
+import AllData from './GET/AllData';
 
-export interface Env {
-	// Example binding to KV. Learn more at https://developers.cloudflare.com/workers/runtime-apis/kv/
-	// MY_KV_NAMESPACE: KVNamespace;
-	//
-	// Example binding to Durable Object. Learn more at https://developers.cloudflare.com/workers/runtime-apis/durable-objects/
-	// MY_DURABLE_OBJECT: DurableObjectNamespace;
-	//
-	// Example binding to R2. Learn more at https://developers.cloudflare.com/workers/runtime-apis/r2/
-	// MY_BUCKET: R2Bucket;
-	//
-	// Example binding to a Service. Learn more at https://developers.cloudflare.com/workers/runtime-apis/service-bindings/
-	// MY_SERVICE: Fetcher;
-	//
-	// Example binding to a Queue. Learn more at https://developers.cloudflare.com/queues/javascript-apis/
-	// MY_QUEUE: Queue;
-	//
-	// Example binding to a D1 Database. Learn more at https://developers.cloudflare.com/workers/platform/bindings/#d1-database-bindings
-	// DB: D1Database
+export interface Bindings {
+	[key: string]: KVNamespace;
+	marvel_zombies: KVNamespace;
+	dceased: KVNamespace;
+	custom_heroes: KVNamespace;
 }
 
-const app = new Hono();
+const app = new Hono<{ Bindings: Bindings }>();
 
-app.use('/', async () => {
-	return new Response(JSON.stringify(await SaveToKV()), {
+app.use('/', async (c, next) => {
+	return new Response(JSON.stringify(await SaveToKV(c.env)), {
+		headers: {
+			'Content-Type': 'application/json',
+		},
+	});
+});
+app.use('/__scheduled', async (c, next) => {
+	return new Response(JSON.stringify(await SaveToKV(c.env)), {
+		headers: {
+			'Content-Type': 'application/json',
+		},
+	});
+});
+
+app.use('/all', async (c, next) => {
+	return new Response(JSON.stringify(await AllData(c.env)), {
 		headers: {
 			'Content-Type': 'application/json',
 		},
