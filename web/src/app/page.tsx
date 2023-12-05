@@ -6,8 +6,9 @@ import { HeroType, Section } from "@/types/HeroTypes";
 import { useApp } from "./useApp";
 import { AppData, PageId } from "@/store/AppStore";
 import BoxCollectionView from "@/components/BoxCollection/BoxCollectionView";
-import HeroCardView from "@/components/HeroCard/HeroCardView";
+import HeroDetailsView from "@/components/HeroCard/HeroCardView";
 import SearchView from "@/components/Search/SearchView";
+import PickTeamView from "@/components/PickTeam/PickTeamView";
 
 export default function Home() {
 	const { pageId, setPageId, setAppData } = useApp();
@@ -68,9 +69,13 @@ export default function Home() {
 		<>
 			{allData && (
 				<div className="p-4">
-					<BoxCollectionView data={allData} />
-					<HeroCardView />
-					<SearchView />
+					<BoxCollectionView
+						data={allData}
+						active={pageId == PageId.BoxCollection}
+					/>
+					<HeroDetailsView active={pageId == PageId.HeroDetails} />
+					<SearchView active={pageId == PageId.Search} />
+					<PickTeamView active={pageId == PageId.PickTeam} />
 					{pageId == PageId.Home && (
 						<div
 							className={`wrapper grid gap-4 view ${

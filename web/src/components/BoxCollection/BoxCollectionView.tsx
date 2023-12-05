@@ -4,12 +4,14 @@ import { useApp } from "@/app/useApp";
 import { AppData, GameUniverse, PageId } from "@/store/AppStore";
 import BoxCollectionSection from "./BoxCollectionSection";
 import SearchInput from "../Search/SearchInput";
+import { PageView } from "@/types/PageView";
 
 export default function BoxCollectionView({
 	data: { marvel_zombies, dceased },
+	active,
 }: {
 	data: AppData;
-}) {
+} & PageView) {
 	const [gameUniverse, setGameUniverse] = useState<GameUniverse | null>(
 		GameUniverse.MarvelZombies
 	);
@@ -20,17 +22,19 @@ export default function BoxCollectionView({
 	const { pageId, setPageId } = useApp();
 
 	return (
-		<div
-			className={`view gap-8 ${
-				pageId == PageId.BoxCollection && "view--active"
-			}`}
-		>
+		<div className={`view gap-8 ${active && "view--active"}`}>
 			<a
 				className="block p-4 bg-green-900 rounded-lg text-center"
 				onClick={() => setPageId(PageId.Home)}
 			>
 				Back
 			</a>
+			{/* <a
+				className="block p-4 bg-green-900 rounded-lg text-center"
+				onClick={() => setPageId(PageId.PickTeam)}
+			>
+				Pick Your Team
+			</a> */}
 			<SearchInput onClick={() => setPageId(PageId.Search)} />
 			<div className="grid grid-cols-2 border-2 p-2 rounded-lg border-slate-700 gap-2">
 				<button
