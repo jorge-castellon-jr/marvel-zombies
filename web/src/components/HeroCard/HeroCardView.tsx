@@ -1,6 +1,6 @@
 "use client";
 import { useApp } from "@/app/useApp";
-import { AppData, PageId } from "@/store/AppStore";
+import { PageId } from "@/store/AppStore";
 import HeroCard from "./HeroCard";
 import Image from "next/image";
 
@@ -20,13 +20,13 @@ export default function HeroCardView() {
 
 	return (
 		<div
-			className={`p-4 gap-8 grid view ${
+			className={`gap-8 grid view ${
 				pageId == PageId.HeroDetails && "view--active"
 			}`}
 		>
 			<a
 				className="block p-4 bg-green-900 rounded-lg text-center"
-				onClick={() => setPageId(PageId.MarvelZombies)}
+				onClick={() => setPageId(PageId.BoxCollection)}
 			>
 				Back
 			</a>

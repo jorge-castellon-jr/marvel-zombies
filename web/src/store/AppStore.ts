@@ -2,11 +2,11 @@ import { atom } from "jotai";
 
 export enum PageId {
 	Home,
-	MarvelZombies,
-	Dceased,
+	BoxCollection,
 	CustomHeroes,
 	PickTeam,
 	HeroDetails,
+	Search,
 }
 
 export const usePageId = atom<PageId>(PageId.Home);
@@ -75,4 +75,11 @@ export interface HeroSelection {
 	hero: CharacterData;
 }
 
+export type SearchResults = CharacterData & {
+	searchType: string;
+	gameUniverse: GameUniverse;
+};
+
 export const useHeroSelection = atom<HeroSelection>({} as HeroSelection);
+
+export const useSearchResults = atom<SearchResults[]>([]);

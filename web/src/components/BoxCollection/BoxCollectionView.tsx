@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useApp } from "@/app/useApp";
 import { AppData, GameUniverse, PageId } from "@/store/AppStore";
 import BoxCollectionSection from "./BoxCollectionSection";
+import SearchInput from "../SearchInput";
 
 export default function BoxCollectionView({
 	data: { marvel_zombies, dceased },
@@ -20,8 +21,8 @@ export default function BoxCollectionView({
 
 	return (
 		<div
-			className={`p-4 view gap-8 ${
-				pageId == PageId.MarvelZombies && "view--active"
+			className={`view gap-8 ${
+				pageId == PageId.BoxCollection && "view--active"
 			}`}
 		>
 			<a
@@ -30,6 +31,7 @@ export default function BoxCollectionView({
 			>
 				Back
 			</a>
+			<SearchInput onClick={() => setPageId(PageId.Search)} />
 			<div className="grid grid-cols-2 border-2 p-2 rounded-lg border-slate-700 gap-2">
 				<button
 					className={`${
