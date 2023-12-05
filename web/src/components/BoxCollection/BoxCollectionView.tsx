@@ -36,23 +36,23 @@ export default function BoxCollectionView({
 				Pick Your Team
 			</a> */}
 			<SearchInput onClick={() => setPageId(PageId.Search)} />
-			<div className="grid grid-cols-2 border-2 p-2 rounded-lg border-slate-700 gap-2">
-				<button
+			<div className="grid grid-cols-2 border-2 p-1 rounded-lg border-slate-700 gap-2">
+				<a
 					className={`${
 						isMarvelZombies && "bg-slate-700"
 					}  rounded-lg border-gray-800 text-xl text-center py-4 px-2`}
 					onClick={() => setGameUniverse(GameUniverse.MarvelZombies)}
 				>
 					Marvel Zombies
-				</button>
-				<button
+				</a>
+				<a
 					className={`${
 						isDCeased && "bg-slate-700"
 					}  rounded-lg border-gray-800 text-xl text-center py-4 px-2`}
 					onClick={() => setGameUniverse(GameUniverse.DCeased)}
 				>
 					DCeased
-				</button>
+				</a>
 			</div>
 			<div className="grid gap-8">
 				{/* {JSON.stringify(heroSelected)} */}

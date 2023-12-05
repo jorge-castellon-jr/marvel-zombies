@@ -55,18 +55,6 @@ export default function HeroDetailsView({ active }: PageView) {
 				Back
 			</a>
 			<div className="grid gap-8">
-				{hasImage && (
-					<Image
-						src={heroSelected.hero.character_image_url}
-						className="rounded-lg "
-						width={500}
-						height={500}
-						alt="Hero Image"
-						loading="eager"
-						placeholder="blur"
-						blurDataURL={heroSelected.hero.character_image_url}
-					/>
-				)}
 				{hasDescription && (
 					<div className="bg-slate-700 rounded-lg p-4">
 						<p className="text-white">
@@ -77,35 +65,48 @@ export default function HeroDetailsView({ active }: PageView) {
 					</div>
 				)}
 				{hasSpawn && hasAttack && (
-					<div className="grid grid-cols-2 border-2 p-2 rounded-lg border-slate-700 gap-2">
-						<button
+					<div className="grid grid-cols-2 border-2 p-1 rounded-lg border-slate-700 gap-2">
+						<a
 							className={`${
 								isIdCard && "bg-slate-700"
 							}  rounded-lg border-gray-800 text-xl text-center py-4 px-2`}
 							onClick={() => setDetailState(DetailState.IdCard)}
 						>
 							ID Card
-						</button>
-						<button
+						</a>
+						<a
 							className={`${
 								isSpawnCard && "bg-slate-700"
 							}  rounded-lg border-gray-800 text-xl text-center py-4 px-2`}
 							onClick={() => setDetailState(DetailState.SpawnCard)}
 						>
 							Spawn Card
-						</button>
+						</a>
 					</div>
 				)}
 				{hasAttack && isIdCard && <HeroCard hero={heroSelected} />}
 				{hasSpawn && isSpawnCard && (
-					<div className="bg-slate-700 rounded-lg p-4 relative">
-						{/* create a heart css */}
-						<div className=" absolute -top-4 right-4 px-4 h-8 bg-red-900 transform border-2 grid items-center justify-center border-white">
-							Toughness: {heroSelected.hero.toughness}
+					<>
+						{hasImage && (
+							<Image
+								src={heroSelected.hero.character_image_url}
+								className="rounded-lg drop-shadow-lg"
+								width={500}
+								height={500}
+								alt="Hero Image"
+							/>
+						)}
+						<div className="bg-slate-700 rounded-lg p-4 relative">
+							{/* create a heart css */}
+							<div className=" absolute -top-4 right-4 px-4 h-8 bg-red-900 transform border-2 grid items-center justify-center border-white">
+								Toughness: {heroSelected.hero.toughness}
+							</div>
+							<div></div>
+							<p className="text-white">
+								{heroSelected.hero.spawn_card_ability}
+							</p>
 						</div>
-						<div></div>
-						<p className="text-white">{heroSelected.hero.spawn_card_ability}</p>
-					</div>
+					</>
 				)}
 			</div>
 		</div>
