@@ -21,28 +21,36 @@ export default function SearchInput({
 			if (search === "") return setSearchResults([]);
 
 			const marvel_heroes = appData.marvel_zombies.heroes
-				.filter((hero) => hero.character_name.toLowerCase().includes(search))
+				.filter((hero) =>
+					hero.character_name.toLowerCase().includes(search.toLowerCase())
+				)
 				.map((hero: CharacterData) => ({
 					...hero,
 					searchType: "heroes",
 					gameUniverse: GameUniverse.MarvelZombies,
 				}));
 			const marvel_zombies = appData.marvel_zombies.zombies
-				.filter((hero) => hero.character_name.toLowerCase().includes(search))
+				.filter((hero) =>
+					hero.character_name.toLowerCase().includes(search.toLowerCase())
+				)
 				.map((hero: CharacterData) => ({
 					...hero,
 					searchType: "zombies",
 					gameUniverse: GameUniverse.MarvelZombies,
 				}));
 			const dc_heroes = appData.dceased.heroes
-				.filter((hero) => hero.character_name.toLowerCase().includes(search))
+				.filter((hero) =>
+					hero.character_name.toLowerCase().includes(search.toLowerCase())
+				)
 				.map((hero: CharacterData) => ({
 					...hero,
 					searchType: "heroes",
 					gameUniverse: GameUniverse.DCeased,
 				}));
 			const dc_zombies = appData.dceased.zombies
-				.filter((hero) => hero.character_name.toLowerCase().includes(search))
+				.filter((hero) =>
+					hero.character_name.toLowerCase().includes(search.toLowerCase())
+				)
 				.map((hero: CharacterData) => ({
 					...hero,
 					searchType: "zombies",
