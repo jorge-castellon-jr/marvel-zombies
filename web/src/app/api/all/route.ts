@@ -32,11 +32,6 @@ const getAllData = async (): Promise<AppData> => {
 	const heroes = allHeroes.filter((hero) => hero.type === HeroType.Hero);
 	const zombies = allHeroes.filter((hero) => hero.type === HeroType.Zombie);
 
-	console.log(
-		"heroes",
-		heroes.sort((a, b) => a.name.localeCompare(b.name))
-	);
-
 	json.marvel_zombies.heroes = json.marvel_zombies.heroes.map(
 		(hero: CharacterData) => {
 			if (!!hero.character_thumbnail) return hero;
