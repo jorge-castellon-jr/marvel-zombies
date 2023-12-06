@@ -63,12 +63,6 @@ export default function PickTeamView({
 			>
 				Back
 			</a>
-			<a
-				className="block p-4 bg-green-900 rounded-lg text-center"
-				onClick={() => clearSearch()}
-			>
-				Clear
-			</a>
 			{team.length > 0 &&
 				team.map((hero) => (
 					<HeroCard
