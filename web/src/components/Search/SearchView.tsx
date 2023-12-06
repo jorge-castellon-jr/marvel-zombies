@@ -29,7 +29,7 @@ export default function SearchView({ active }: PageView) {
 			</a>
 			<SearchInput autoFocus />
 			{searchResults.length ? (
-				<div className="grid grid-cols-3 gap-4">
+				<div className="grid grid-cols-4 gap-2">
 					{searchResults.map((result, index) => (
 						<BoxCollectionSectionIcon
 							key={`${result.character_name}_${result.set}_${index}`}

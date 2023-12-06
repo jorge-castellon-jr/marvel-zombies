@@ -22,7 +22,7 @@ export default function BoxCollectionSectionIcon({
 			} rounded-lg shadow-lg overflow-hidden text-center flex flex-col justify-center items-center`}
 			onClick={() => onClick()}
 		>
-			{image && <Image src={image} width={100} height={100} alt="Hero Image" />}
+			{image && <Image src={image} width={125} height={100} alt="Hero Image" />}
 			<div
 				className={`${
 					!image ? "h-28" : "h-full"

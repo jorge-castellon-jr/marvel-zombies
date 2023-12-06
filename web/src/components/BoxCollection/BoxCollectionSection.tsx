@@ -28,7 +28,7 @@ export default function BoxCollectionSection({
 	const { setHeroSelected, setPageId } = useApp();
 
 	return (
-		<div key={set || boxSet?.name} className="grid gap-4">
+		<div key={set || boxSet?.name} className="grid gap-2">
 			<div className="flex justify-center items-center w-full bg-slate-900 rounded-lg px-4 py-8   shadow-lg relative overflow-hidden">
 				{boxSet?.image && (
 					<Image

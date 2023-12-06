@@ -27,7 +27,7 @@ export default function Home() {
 	return (
 		<>
 			{allData && (
-				<div className="p-4">
+				<div className="p-2">
 					<BoxCollectionView
 						data={allData}
 						active={pageId == PageId.BoxCollection}
