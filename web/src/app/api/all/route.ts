@@ -1,4 +1,4 @@
-import { AppData } from "@/store/AppStore";
+import { AppData, CharacterData } from "@/store/AppStore";
 import { getSections } from "../sections/route";
 import { HeroType } from "@/types/HeroTypes";
 
@@ -8,9 +8,6 @@ const getAllData = async (): Promise<AppData> => {
 	const json = await response.json();
 
 	const sections = await getSections();
-	const allHeroes = sections.map((section) => section.heroes).flat();
-	const heroes = allHeroes.filter((hero) => hero.type === HeroType.Hero);
-	const zombies = allHeroes.filter((hero) => hero.type === HeroType.Zombie);
 
 	const setMapper: { [key: string]: string } = {
 		"Core Box": "Marvel",
@@ -24,7 +21,6 @@ const getAllData = async (): Promise<AppData> => {
 		"Artist's Special Edition Set": "Marvel Artist",
 		"Stretch Goals": "Marvel K S",
 	};
-
 	json.marvel_zombies.sets = json.marvel_zombies.sets.map((set: string) => ({
 		name: set,
 		image:
@@ -32,7 +28,51 @@ const getAllData = async (): Promise<AppData> => {
 			"",
 	}));
 
-	return json;
+	const allHeroes = sections.map((section) => section.heroes).flat();
+	const heroes = allHeroes.filter((hero) => hero.type === HeroType.Hero);
+	const zombies = allHeroes.filter((hero) => hero.type === HeroType.Zombie);
+
+	console.log(
+		"heroes",
+		heroes.sort((a, b) => a.name.localeCompare(b.name))
+	);
+
+	json.marvel_zombies.heroes = json.marvel_zombies.heroes.map(
+		(hero: CharacterData) => {
+			if (!!hero.character_thumbnail) return hero;
+
+			const heroData = zombies.find(
+				(h) =>
+					(h.name === hero.character_name ||
+						h.name === hero.character_name.replace("-", " ") ||
+						h.name === hero.character_name.replace(".", "")) &&
+					h.type === HeroType.Zombie
+			);
+			return {
+				...hero,
+				character_thumbnail: heroData?.image || "",
+			};
+		}
+	);
+	json.marvel_zombies.zombies = json.marvel_zombies.zombies.map(
+		(hero: CharacterData) => {
+			if (!!hero.character_thumbnail) return hero;
+
+			const heroData = zombies.find(
+				(h) =>
+					(h.name === hero.character_name ||
+						h.name === hero.character_name.replace("-", " ") ||
+						h.name === hero.character_name.replace(".", "")) &&
+					h.type === HeroType.Zombie
+			);
+			return {
+				...hero,
+				character_thumbnail: heroData?.image || "",
+			};
+		}
+	);
+
+	return { ...json, heroes, zombies };
 };
 
 export const GET = async () => {
