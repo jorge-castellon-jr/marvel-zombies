@@ -1,7 +1,7 @@
 import { load, Element } from "cheerio";
 import { Hero, HeroType, Section } from "../../../types/HeroTypes";
 
-const getSections = async (): Promise<Section[]> => {
+export const getSections = async (): Promise<Section[]> => {
 	const url = "https://zombicide.fandom.com/wiki/Marvel_Zombies_Heroes";
 	const response = await fetch(url);
 	const html = await response.text();
@@ -14,10 +14,9 @@ const getSections = async (): Promise<Section[]> => {
 	// Extract necessary data from sections
 	const extractedData = sections.map((section): Section => {
 		// Example extraction, modify as per your data structure
+		const image = $(section).find("td[rowspan=2] img");
 		return {
-			// have box name add spaces between words and numbers
-			boxName: $(section)
-				.find("td[rowspan=2] img")
+			boxName: image
 				.attr("data-image-name")
 				?.replace("Cover", "")
 				.replace("cover", "")
@@ -25,8 +24,8 @@ const getSections = async (): Promise<Section[]> => {
 				.replace(/([a-z])([A-Z0-9])/g, "$1 $2")
 				.replace(/([A-Z])([A-Z])/g, "$1 $2") as string,
 			boxImage:
-				($(section).find("td[rowspan=2] img").attr("data-src") as string) ||
-				($(section).find("td[rowspan=2] img").attr("src") as string),
+				(image.attr("data-src")?.split("/revision")[0] as string) ||
+				(image.attr("src")?.split("/revision")[0] as string),
 			heroes: $(section)
 				.find(".survivor-table")
 				.toArray()

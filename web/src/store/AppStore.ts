@@ -52,7 +52,7 @@ export interface AppData {
 		zombies: CharacterData[];
 		bystanders: BystanderData[];
 		npcs: NPCData[];
-		sets: string[];
+		sets: BoxSet[];
 	};
 	dceased: {
 		heroes: CharacterData[];
@@ -62,6 +62,11 @@ export interface AppData {
 		sets: string[];
 	};
 	custom_heroes: {};
+}
+
+export interface BoxSet {
+	name: string;
+	image: string;
 }
 
 export const useAppData = atom<AppData>({} as AppData);

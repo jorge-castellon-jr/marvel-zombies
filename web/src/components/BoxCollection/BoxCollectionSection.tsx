@@ -1,14 +1,23 @@
-import { AppData, CharacterData, GameUniverse, PageId } from "@/store/AppStore";
+import {
+	AppData,
+	BoxSet,
+	CharacterData,
+	GameUniverse,
+	PageId,
+} from "@/store/AppStore";
 import BoxCollectionSectionIcon from "./BoxCollectionSectionIcon";
 import { HeroType } from "@/types/HeroTypes";
 import { useApp } from "@/app/useApp";
+import Image from "next/image";
 
 export default function BoxCollectionSection({
 	set,
+	boxSet,
 	data,
 	gameUniverse,
 }: {
-	set: string;
+	set?: string;
+	boxSet?: BoxSet;
 	data: AppData["marvel_zombies"] | AppData["dceased"];
 	gameUniverse: GameUniverse;
 }) {
@@ -19,12 +28,23 @@ export default function BoxCollectionSection({
 	const { setHeroSelected, setPageId } = useApp();
 
 	return (
-		<div key={set} className="grid gap-4">
-			<div className="flex justify-center items-center w-full bg-slate-900 rounded-lg px-4 py-8 text-lg font-bold uppercase shadow-lg">
-				{set}
+		<div key={set || boxSet?.name} className="grid gap-4">
+			<div className="flex justify-center items-center w-full bg-slate-900 rounded-lg px-4 py-8   shadow-lg relative overflow-hidden">
+				{boxSet?.image && (
+					<Image
+						src={boxSet?.image}
+						alt={boxSet?.name}
+						className="absolute inset-0 opacity-50"
+						layout="fill"
+						objectFit="cover"
+					/>
+				)}
+				<span className="realtive z-10 text-slate-100 font-black uppercase text-xl drop-shadow-[0_2px_2px_rgba(0,0,0,1)]">
+					{set || boxSet?.name}
+				</span>
 			</div>
 			<div className="grid grid-cols-4 gap-2">
-				{getSet(set, data.heroes).map((hero) => (
+				{getSet(set || boxSet!.name, data.heroes).map((hero) => (
 					<BoxCollectionSectionIcon
 						key={hero.character_name}
 						name={hero.character_name}
@@ -36,7 +56,7 @@ export default function BoxCollectionSection({
 						}}
 					/>
 				))}
-				{getSet(set, data.zombies).map((zombie) => (
+				{getSet(set || boxSet!.name, data.zombies).map((zombie) => (
 					<BoxCollectionSectionIcon
 						key={zombie.character_name}
 						name={zombie.character_name}

@@ -139,7 +139,7 @@ export default function PickTeamView({
 				<p className="text-white text-center place-self-center">No Results</p>
 			) : (
 				<div className="grid grid-cols-3 gap-4">
-					{isMarvelZombies && (
+					{isMarvelZombies && marvel_zombies && (
 						<>
 							{marvel_zombies.heroes.map((result, index) => (
 								<BoxCollectionSectionIcon

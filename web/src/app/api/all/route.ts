@@ -1,14 +1,44 @@
-const getAllData = async (): Promise<any> => {
-  const url = "https://zombies-api.heroesgrid.com/all";
-  const response = await fetch(url);
-  const json = await response.json();
-  return json;
+import { AppData } from "@/store/AppStore";
+import { getSections } from "../sections/route";
+import { HeroType } from "@/types/HeroTypes";
+
+const getAllData = async (): Promise<AppData> => {
+	const url = "https://zombies-api.heroesgrid.com/all";
+	const response = await fetch(url);
+	const json = await response.json();
+
+	const sections = await getSections();
+	const allHeroes = sections.map((section) => section.heroes).flat();
+	const heroes = allHeroes.filter((hero) => hero.type === HeroType.Hero);
+	const zombies = allHeroes.filter((hero) => hero.type === HeroType.Zombie);
+
+	const setMapper: { [key: string]: string } = {
+		"Core Box": "Marvel",
+		"X-Men Resistance": "Marvel X Men",
+		"Fantastic 4: Under Siege": "Marvel Fantastic 4",
+		"Guardians of the Galaxy Set": "Marvel Guardians",
+		"Hydra Resurrection": "Marvel Hydra",
+		"Sentinel Strike": "Marvel Sentinel Strike",
+		"Clash of the Sinister Six": "Marvel Sinister 6",
+		"Galactus the Devourer": "Galactus ",
+		"Artist's Special Edition Set": "Marvel Artist",
+		"Stretch Goals": "Marvel K S",
+	};
+
+	json.marvel_zombies.sets = json.marvel_zombies.sets.map((set: string) => ({
+		name: set,
+		image:
+			sections.find((section) => section.boxName == setMapper[set])?.boxImage ||
+			"",
+	}));
+
+	return json;
 };
 
 export const GET = async () => {
-  const data: any = await getAllData();
-  return new Response(JSON.stringify(data), {
-    status: 200,
-    headers: { "Content-Type": "application/json" },
-  });
+	const data = await getAllData();
+	return new Response(JSON.stringify(data), {
+		status: 200,
+		headers: { "Content-Type": "application/json" },
+	});
 };

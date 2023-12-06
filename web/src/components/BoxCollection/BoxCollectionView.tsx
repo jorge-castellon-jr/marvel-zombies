@@ -54,19 +54,17 @@ export default function BoxCollectionView({
 				</a>
 			</div>
 			<div className="grid gap-8">
-				{marvel_zombies &&
-					isMarvelZombies &&
-					marvel_zombies.sets.map((set: string) => (
+				{isMarvelZombies &&
+					marvel_zombies.sets.map((set) => (
 						<BoxCollectionSection
-							key={set}
-							set={set}
+							key={set.name}
+							boxSet={set}
 							data={marvel_zombies}
 							gameUniverse={GameUniverse.MarvelZombies}
 						/>
 					))}
-				{dceased &&
-					isDCeased &&
-					dceased.sets.map((set: string) => (
+				{isDCeased &&
+					dceased.sets.map((set) => (
 						<BoxCollectionSection
 							key={set}
 							set={set}
