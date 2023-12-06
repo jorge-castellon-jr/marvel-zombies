@@ -36,12 +36,12 @@ const getAllData = async (): Promise<AppData> => {
 		(hero: CharacterData) => {
 			if (!!hero.character_thumbnail) return hero;
 
-			const heroData = zombies.find(
+			const heroData = heroes.find(
 				(h) =>
 					(h.name === hero.character_name ||
 						h.name === hero.character_name.replace("-", " ") ||
 						h.name === hero.character_name.replace(".", "")) &&
-					h.type === HeroType.Zombie
+					h.type === HeroType.Hero
 			);
 			return {
 				...hero,
