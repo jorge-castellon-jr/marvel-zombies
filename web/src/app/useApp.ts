@@ -13,6 +13,10 @@ export const useApp = () => {
 	const [heroSelected, setHeroSelected] = useAtom(useHeroSelection);
 	const [search, setSearch] = useAtom(useSearch);
 	const [searchResults, setSearchResults] = useAtom(useSearchResults);
+	const clearSearch = () => {
+		setSearch("");
+		setSearchResults([]);
+	};
 
 	return {
 		pageId,
@@ -25,5 +29,6 @@ export const useApp = () => {
 		setSearch,
 		searchResults,
 		setSearchResults,
+		clearSearch,
 	};
 };

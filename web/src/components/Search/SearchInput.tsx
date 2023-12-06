@@ -14,7 +14,8 @@ export default function SearchInput({
 	onClick?: () => void;
 	autoFocus?: boolean;
 }) {
-	const { pageId, appData, search, setSearch, setSearchResults } = useApp();
+	const { pageId, appData, search, setSearch, setSearchResults, clearSearch } =
+		useApp();
 
 	useEffect(() => {
 		const filterData = () => {
@@ -73,10 +74,10 @@ export default function SearchInput({
 		if (pageId == PageId.Search) inputRef.current?.focus();
 	}, [pageId]);
 	return (
-		<div className="flex justify-center items-center">
+		<div className="flex justify-center items-center relative">
 			<input
 				ref={inputRef}
-				className="border-2 border-slate-500 bg-slate-800 rounded-lg p-4 w-full"
+				className="border-2 border-slate-500 bg-slate-800 rounded-lg p-4 pr-12 w-full"
 				type="text"
 				placeholder="Search"
 				value={search}
@@ -91,6 +92,12 @@ export default function SearchInput({
 						: () => null
 				}
 			/>
+			<a
+				className="absolute right-4 rounded-full bg-slate-600 font-bold text-xs w-5 h-5 grid justify-center items-center"
+				onClick={() => clearSearch()}
+			>
+				x
+			</a>
 		</div>
 	);
 }

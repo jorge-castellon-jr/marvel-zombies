@@ -12,14 +12,13 @@ export default function BoxCollectionView({
 }: {
 	data: AppData;
 } & PageView) {
+	const { setPageId } = useApp();
 	const [gameUniverse, setGameUniverse] = useState<GameUniverse | null>(
 		GameUniverse.MarvelZombies
 	);
 
 	const isMarvelZombies = gameUniverse == GameUniverse.MarvelZombies;
 	const isDCeased = gameUniverse == GameUniverse.DCeased;
-
-	const { pageId, setPageId } = useApp();
 
 	return (
 		<div className={`view gap-8 ${active && "view--active"}`}>
@@ -29,12 +28,12 @@ export default function BoxCollectionView({
 			>
 				Back
 			</a>
-			{/* <a
+			<a
 				className="block p-4 bg-green-900 rounded-lg text-center"
 				onClick={() => setPageId(PageId.PickTeam)}
 			>
 				Pick Your Team
-			</a> */}
+			</a>
 			<SearchInput onClick={() => setPageId(PageId.Search)} />
 			<div className="grid grid-cols-2 border-2 p-1 rounded-lg border-slate-700 gap-2">
 				<a
@@ -55,7 +54,6 @@ export default function BoxCollectionView({
 				</a>
 			</div>
 			<div className="grid gap-8">
-				{/* {JSON.stringify(heroSelected)} */}
 				{marvel_zombies &&
 					isMarvelZombies &&
 					marvel_zombies.sets.map((set: string) => (

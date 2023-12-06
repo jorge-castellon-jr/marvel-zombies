@@ -75,7 +75,7 @@ export default function Home() {
 					/>
 					<HeroDetailsView active={pageId == PageId.HeroDetails} />
 					<SearchView active={pageId == PageId.Search} />
-					<PickTeamView active={pageId == PageId.PickTeam} />
+					<PickTeamView data={allData} active={pageId == PageId.PickTeam} />
 					{pageId == PageId.Home && (
 						<div
 							className={`wrapper grid gap-4 view ${

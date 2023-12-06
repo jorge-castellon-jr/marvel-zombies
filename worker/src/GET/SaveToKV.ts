@@ -3,17 +3,12 @@ import Client from '../SheetDB/index';
 
 export default async function (env: Bindings) {
 	// Marvel Zombies
-	const mz_tabs = ['Heroes', 'Zombies', 'Bystanders', 'NPCs'];
-	for (const tab of mz_tabs) {
+	const tabs = ['Heroes', 'Zombies'];
+	for (const tab of tabs) {
 		await getSet('702rgfxqcoor5', tab, env.marvel_zombies);
-	}
-	await setUnique({ namespace: env.marvel_zombies, getNamespaceKey: 'heroes', setNamespaceKey: 'sets', filterKey: 'set' });
-
-	// DCeased
-	const dc_tabs = ['Heroes', 'Zombies', 'Bystanders', 'NPCs'];
-	for (const tab of dc_tabs) {
 		await getSet('ci5n9lmw6s4bn', tab, env.dceased);
 	}
+	await setUnique({ namespace: env.marvel_zombies, getNamespaceKey: 'heroes', setNamespaceKey: 'sets', filterKey: 'set' });
 	await setUnique({ namespace: env.dceased, getNamespaceKey: 'heroes', setNamespaceKey: 'sets', filterKey: 'set' });
 
 	return {
@@ -50,6 +45,7 @@ const setUnique = async ({ namespace, getNamespaceKey, setNamespaceKey, filterKe
 };
 
 interface CharacterData {
+	id: string;
 	character_name: string;
 	set: string;
 	alt_sculpt: string;
@@ -118,19 +114,13 @@ export const getAll = async (env: Bindings) => {
 		custom_heroes: {},
 	};
 
-	const mz_data = ['heroes', 'zombies', 'bystanders', 'npcs', 'sets'];
-	for (const tab of mz_data) {
-		const kv_data = await env.marvel_zombies.get(tab);
-		data.marvel_zombies[tab] = kv_data ? await JSON.parse(kv_data) : null;
+	const kv_keys = ['heroes', 'zombies', 'bystanders', 'npcs', 'sets'];
+	for (const key of kv_keys) {
+		const mz_data = await env.marvel_zombies.get(key);
+		data.marvel_zombies[key] = mz_data ? await JSON.parse(mz_data) : null;
+		const dc_data = await env.dceased.get(key);
+		data.dceased[key] = dc_data ? await JSON.parse(dc_data) : null;
 	}
-
-	const dc_data = ['heroes', 'zombies', 'bystanders', 'npcs', 'sets'];
-	for (const tab of dc_data) {
-		const kv_data = await env.dceased.get(tab);
-		data.dceased[tab] = kv_data ? await JSON.parse(kv_data) : null;
-	}
-
-	console.log(data);
 
 	return data;
 };

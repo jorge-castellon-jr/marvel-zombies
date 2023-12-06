@@ -19,6 +19,7 @@ interface BaseData {
 	character_thumbnail: string;
 }
 export interface CharacterData extends BaseData {
+	id: string;
 	alt_sculpt: string;
 	attack: string;
 	type: string;
