@@ -24,12 +24,6 @@ export default function BoxCollectionView({
 		<div className={`view gap-8 ${active && "view--active"}`}>
 			<a
 				className="block p-4 bg-green-900 rounded-lg text-center"
-				onClick={() => setPageId(PageId.Home)}
-			>
-				Back
-			</a>
-			<a
-				className="block p-4 bg-green-900 rounded-lg text-center"
 				onClick={() => setPageId(PageId.PickTeam)}
 			>
 				Pick Your Team

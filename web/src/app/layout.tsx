@@ -18,12 +18,8 @@ export default function RootLayout({
 	return (
 		<html lang="en">
 			<body className={`${inter.className} max-w-3xl mx-auto`}>
-				<h1 className="text-5xl grid place-items-center my-6">
-					Marvel Zombies
-					{/* Add teleport for title or just have global state */}
-				</h1>
 				{children}
-				{/* TODO: Add Nav */}
+				{/* TODO: Add Nav that has teleport */}
 			</body>
 		</html>
 	);

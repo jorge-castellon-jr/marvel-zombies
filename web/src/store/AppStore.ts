@@ -9,7 +9,7 @@ export enum PageId {
 	Search,
 }
 
-export const usePageId = atom<PageId>(PageId.Home);
+export const usePageId = atom<PageId>(PageId.BoxCollection);
 
 interface BaseData {
 	character_name: string;
