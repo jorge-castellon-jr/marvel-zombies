@@ -8,7 +8,7 @@ body {
 
 .view {
 	min-height: calc(100vh - 1rem - 88px);
-	@apply hidden;
+	@apply hidden pb-32;
 	&.view--active {
 		@apply grid;
 	}
