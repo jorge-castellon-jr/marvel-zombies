@@ -13,13 +13,16 @@ import SearchInput from "../Search/SearchInput";
 import BoxCollectionSectionIcon from "../BoxCollection/BoxCollectionSectionIcon";
 import { HeroType } from "@/types/HeroTypes";
 import HeroCard from "../HeroCard/HeroCard";
+import Teleport from "../App/Teleport";
 
-export default function PickTeamView({
-	data: { marvel_zombies, dceased },
-	active,
-}: { data: AppData } & PageView) {
-	const { setPageId, setHeroSelected, search, searchResults, clearSearch } =
-		useApp();
+export default function PickTeamView({ active }: PageView) {
+	const {
+		setPageId,
+		setBackId,
+		search,
+		searchResults,
+		appData: { marvel_zombies, dceased },
+	} = useApp();
 	const [gameUniverse, setGameUniverse] = useState<GameUniverse | null>(
 		GameUniverse.MarvelZombies
 	);
@@ -57,12 +60,6 @@ export default function PickTeamView({
 
 	return (
 		<div className={`grid gap-8 view ${active && "view--active"}`}>
-			<a
-				className="block p-4 bg-green-900 rounded-lg text-center"
-				onClick={() => setPageId(PageId.BoxCollection)}
-			>
-				Back
-			</a>
 			{team.length > 0 &&
 				team.map((hero) => (
 					<HeroCard
@@ -75,41 +72,43 @@ export default function PickTeamView({
 						closeAction={() => setTeam((prev) => prev.filter((h) => h != hero))}
 					/>
 				))}
-			<SearchInput />
-			<div className="grid grid-cols-2 border-2 p-1 rounded-lg border-slate-700 gap-2">
-				<a
-					className={`${
-						isMarvelZombies && "bg-slate-700"
-					}  rounded-lg border-gray-800 text-xl text-center py-4 px-2 relative`}
-					onClick={() => setGameUniverse(GameUniverse.MarvelZombies)}
-				>
-					Marvel Zombies
-					{(mzHeroes.length > 0 || mzZombies.length > 0) && (
-						<span className="absolute -top-4 right-2 rounded-full bg-red-700 w-8 h-8 grid justify-center items-center">
-							{
-								searchResults.filter(
-									(result) => result.gameUniverse == GameUniverse.MarvelZombies
-								).length
-							}
-						</span>
-					)}
-				</a>
-				<a
-					className={`${
-						isDCeased && "bg-slate-700"
-					}  rounded-lg border-gray-800 text-xl text-center py-4 px-2 relative`}
-					onClick={() => setGameUniverse(GameUniverse.DCeased)}
-				>
-					DCeased
-					{dceasedHeroes.length > 0 && (
-						<span className="absolute -top-4 right-2 rounded-full bg-red-700 w-8 h-8 grid justify-center items-center">
-							{dceasedHeroes.length}
-						</span>
-					)}
-				</a>
+			<div className="sticky top-0 bg-slate-800 p-2 -m-2 z-50">
+				<div className="grid grid-cols-2 border-2 p-1 rounded-lg border-slate-700 gap-2">
+					<a
+						className={`${
+							isMarvelZombies && "bg-slate-700"
+						}  rounded-lg border-gray-800 text-xl text-center py-4 px-2 relative`}
+						onClick={() => setGameUniverse(GameUniverse.MarvelZombies)}
+					>
+						Marvel Zombies
+						{(mzHeroes.length > 0 || mzZombies.length > 0) && (
+							<span className="absolute -top-3 right-2 rounded-full bg-lime-800 w-6 h-6 text-xs grid justify-center items-center">
+								{
+									searchResults.filter(
+										(result) =>
+											result.gameUniverse == GameUniverse.MarvelZombies
+									).length
+								}
+							</span>
+						)}
+					</a>
+					<a
+						className={`${
+							isDCeased && "bg-slate-700"
+						}  rounded-lg border-gray-800 text-xl text-center py-4 px-2 relative`}
+						onClick={() => setGameUniverse(GameUniverse.DCeased)}
+					>
+						DCeased
+						{dceasedHeroes.length > 0 && (
+							<span className="absolute -top-3 right-2 rounded-full bg-cyan-800 w-6 h-6 text-xs grid justify-center items-center">
+								{dceasedHeroes.length}
+							</span>
+						)}
+					</a>
+				</div>
 			</div>
 			{searchResults.length ? (
-				<div className="grid grid-cols-3 gap-4">
+				<div className="grid grid-cols-4 gap-2">
 					{searchResults
 						.filter((result) => {
 							if (result.searchType == "zombies") {
@@ -138,7 +137,7 @@ export default function PickTeamView({
 			) : !!search ? (
 				<p className="text-white text-center place-self-center">No Results</p>
 			) : (
-				<div className="grid grid-cols-3 gap-4">
+				<div className="grid grid-cols-4 gap-2">
 					{isMarvelZombies && marvel_zombies && (
 						<>
 							{marvel_zombies.heroes.map((result, index) => (
@@ -175,6 +174,11 @@ export default function PickTeamView({
 							/>
 						))}
 				</div>
+			)}
+			{active && (
+				<Teleport to="#teleport_main_nav">
+					<SearchInput />
+				</Teleport>
 			)}
 		</div>
 	);

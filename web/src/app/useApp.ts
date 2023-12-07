@@ -1,6 +1,9 @@
 import {
 	useAppData,
+	useBackId,
 	useHeroSelection,
+	useLoading,
+	useNeedsBack,
 	usePageId,
 	useSearch,
 	useSearchResults,
@@ -8,7 +11,10 @@ import {
 import { useAtom } from "jotai";
 
 export const useApp = () => {
+	const [loading, setLoading] = useAtom(useLoading);
 	const [pageId, setPageId] = useAtom(usePageId);
+	const [backId, setBackId] = useAtom(useBackId);
+	const [needsBack, setNeedsBack] = useAtom(useNeedsBack);
 	const [appData, setAppData] = useAtom(useAppData);
 	const [heroSelected, setHeroSelected] = useAtom(useHeroSelection);
 	const [search, setSearch] = useAtom(useSearch);
@@ -19,8 +25,14 @@ export const useApp = () => {
 	};
 
 	return {
+		loading,
+		setLoading,
 		pageId,
 		setPageId,
+		backId,
+		setBackId,
+		needsBack,
+		setNeedsBack,
 		appData,
 		setAppData,
 		heroSelected,

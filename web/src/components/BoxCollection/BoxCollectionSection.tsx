@@ -25,7 +25,7 @@ export default function BoxCollectionSection({
 		return characterData.filter((character) => character.set === set);
 	};
 
-	const { setHeroSelected, setPageId } = useApp();
+	const { setHeroSelected, setPageId, setBackId } = useApp();
 
 	return (
 		<div key={set || boxSet?.name} className="grid gap-2">
@@ -52,7 +52,10 @@ export default function BoxCollectionSection({
 						image={hero.character_thumbnail}
 						onClick={() => {
 							setHeroSelected({ hero, type: "heroes", gameUniverse });
-							setPageId(PageId.HeroDetails);
+							setPageId((prev) => {
+								setBackId(prev);
+								return PageId.HeroDetails;
+							});
 						}}
 					/>
 				))}
@@ -68,7 +71,10 @@ export default function BoxCollectionSection({
 								type: "zombies",
 								gameUniverse,
 							});
-							setPageId(PageId.HeroDetails);
+							setPageId((prev) => {
+								setBackId(prev);
+								return PageId.HeroDetails;
+							});
 						}}
 					/>
 				))}

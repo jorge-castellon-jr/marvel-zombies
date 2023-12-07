@@ -1,5 +1,7 @@
 import { atom } from "jotai";
 
+export const useLoading = atom<boolean>(true);
+
 export enum PageId {
 	Home,
 	BoxCollection,
@@ -10,6 +12,8 @@ export enum PageId {
 }
 
 export const usePageId = atom<PageId>(PageId.BoxCollection);
+export const useBackId = atom<PageId>(PageId.BoxCollection);
+export const useNeedsBack = atom<boolean>(false);
 
 interface BaseData {
 	character_name: string;
