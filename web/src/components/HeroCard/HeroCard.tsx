@@ -27,7 +27,7 @@ export default function HeroCard({
 
 	return (
 		<div className="bg-cyan-200 bg-opacity-50 rounded-lg grid ">
-			<div className="p-4 -mx-4 bg-red-800 border border-white sticky top-0 flex justify-between items-center shadow-lg">
+			<div className="p-4 -mx-2 bg-red-800 border border-white sticky top-0 flex justify-between items-center shadow-lg">
 				<div>{heroName}</div>
 				{closeAction && (
 					<div
