@@ -29,26 +29,8 @@ const getAllData = async (): Promise<AppData> => {
 	}));
 
 	const allHeroes = sections.map((section) => section.heroes).flat();
-	const heroes = allHeroes.filter((hero) => hero.type === HeroType.Hero);
 	const zombies = allHeroes.filter((hero) => hero.type === HeroType.Zombie);
 
-	json.marvel_zombies.heroes = json.marvel_zombies.heroes.map(
-		(hero: CharacterData) => {
-			if (!!hero.character_thumbnail) return hero;
-
-			const heroData = heroes.find(
-				(h) =>
-					(h.name === hero.character_name ||
-						h.name === hero.character_name.replace("-", " ") ||
-						h.name === hero.character_name.replace(".", "")) &&
-					h.type === HeroType.Hero
-			);
-			return {
-				...hero,
-				character_thumbnail: heroData?.image || "",
-			};
-		}
-	);
 	json.marvel_zombies.zombies = json.marvel_zombies.zombies.map(
 		(hero: CharacterData) => {
 			if (!!hero.character_thumbnail) return hero;
@@ -67,7 +49,7 @@ const getAllData = async (): Promise<AppData> => {
 		}
 	);
 
-	return { ...json, heroes, zombies };
+	return json;
 };
 
 export const GET = async () => {
