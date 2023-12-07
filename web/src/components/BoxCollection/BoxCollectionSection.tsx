@@ -35,8 +35,7 @@ export default function BoxCollectionSection({
 						src={boxSet?.image}
 						alt={boxSet?.name}
 						className="absolute inset-0 opacity-50 object-cover"
-						layout="fill"
-						objectFit="cover"
+						fill
 					/>
 				)}
 				<span className="realtive z-10 text-slate-100 font-black uppercase text-xl drop-shadow-[0_2px_2px_rgba(0,0,0,1)]">
