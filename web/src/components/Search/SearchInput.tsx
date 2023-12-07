@@ -74,10 +74,10 @@ export default function SearchInput({
 		if (pageId == PageId.Search) inputRef.current?.focus();
 	}, [pageId]);
 	return (
-		<div className="flex justify-center items-center relative">
+		<div className="flex justify-center items-center relative h-full">
 			<input
 				ref={inputRef}
-				className="border-2 border-slate-500 bg-slate-800 rounded-lg p-4 pr-12 w-full"
+				className="border-2 border-slate-500 bg-slate-800 rounded-lg px-3 pr-12 w-full h-full"
 				type="text"
 				placeholder="Search"
 				value={search}

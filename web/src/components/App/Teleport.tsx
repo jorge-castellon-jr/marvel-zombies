@@ -21,7 +21,7 @@ export default function Teleport({
 
 	return targetContainer
 		? createPortal(
-				<div className={`teleport ${className}`}>{children}</div>,
+				<div className={`h-full ${className}`}>{children}</div>,
 				targetContainer
 		  )
 		: null;

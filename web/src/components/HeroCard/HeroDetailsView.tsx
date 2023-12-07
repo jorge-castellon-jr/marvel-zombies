@@ -85,26 +85,28 @@ export default function HeroDetailsView({ active }: PageView) {
 			</div>
 			{active && (
 				<Teleport to="#teleport_main_nav">
-					{hasSpawn && hasAttack && (
-						<div className="grid grid-cols-2 border-2 p-1 rounded-lg border-slate-700 gap-2">
+					<div className="grid grid-cols-2 border-2  rounded-lg border-slate-700 gap-2">
+						{hasAttack && (
 							<a
-								className={`${
-									isIdCard && "bg-slate-700"
-								}  rounded-lg border-gray-800 text-xl text-center py-3 px-2`}
+								className={`${isIdCard && "bg-slate-700"}  ${
+									!hasSpawn && "col-span-2"
+								} border-gray-800 text-xl text-center py-3 px-2`}
 								onClick={() => setDetailState(DetailState.IdCard)}
 							>
 								ID Card
 							</a>
+						)}
+						{hasSpawn && (
 							<a
-								className={`${
-									isSpawnCard && "bg-slate-700"
-								}  rounded-lg border-gray-800 text-xl text-center py-3 px-2`}
+								className={`${isSpawnCard && "bg-slate-700"} ${
+									!hasAttack && "col-span-2"
+								} border-gray-800 text-xl text-center py-3 px-2`}
 								onClick={() => setDetailState(DetailState.SpawnCard)}
 							>
 								Spawn Card
 							</a>
-						</div>
-					)}
+						)}
+					</div>
 				</Teleport>
 			)}
 		</div>
