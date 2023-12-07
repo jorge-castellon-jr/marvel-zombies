@@ -1,5 +1,5 @@
 import { AppData, CharacterData } from "@/store/AppStore";
-import { getSections } from "../sections/GetSections";
+import { getSections } from "./GetSections";
 import { HeroType } from "@/types/HeroTypes";
 
 const getAllData = async (): Promise<AppData> => {

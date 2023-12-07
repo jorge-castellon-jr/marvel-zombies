@@ -34,7 +34,7 @@ export default function BoxCollectionSection({
 					<Image
 						src={boxSet?.image}
 						alt={boxSet?.name}
-						className="absolute inset-0 opacity-50"
+						className="absolute inset-0 opacity-50 object-cover"
 						layout="fill"
 						objectFit="cover"
 					/>
